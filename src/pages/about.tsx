@@ -6,7 +6,7 @@ type Props = {}
 
 const About = () => {
   return (
-    <Layout>
+    <Layout isBlog={false}>
       <p>AboutAbout.</p>
     </Layout>
   )

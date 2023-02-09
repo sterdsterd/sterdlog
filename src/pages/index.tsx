@@ -6,8 +6,8 @@ type Props = {}
 
 const Blog = () => {
   return (
-    <Layout>
-      <p>블로그 메인.</p>
+    <Layout isBlog={false}>
+      <p>웹사이트 메인.</p>
     </Layout>
   )
 }

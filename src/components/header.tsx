@@ -6,6 +6,7 @@ import SterdLogoSVG from "./logoSVG"
 
 type Props = {
   title: string
+  isBlog: boolean
 }
 
 type MenuType = {
@@ -75,7 +76,7 @@ const Header = (props: Props) => {
     <Nav>
       <Link to="/">
         <Logo>
-          <SterdLogoSVG height={28} />
+          <SterdLogoSVG isBlog={props.isBlog} />
         </Logo>
       </Link>
       <Menu>

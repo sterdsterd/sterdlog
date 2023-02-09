@@ -21,7 +21,7 @@ const BlogPostTemplate = ({
   const siteTitle = site.siteMetadata?.title || `Title`
 
   return (
-    <Layout>
+    <Layout isBlog={true}>
       <Post itemScope itemType="http://schema.org/Article">
         <header>
           <Title itemProp="headline">{post.frontmatter.title}</Title>

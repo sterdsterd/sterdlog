@@ -4,9 +4,10 @@ import Header from "./header"
 
 type Props = {
   children: React.ReactNode
+  isBlog: boolean
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children, isBlog }: Props) => {
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -18,7 +19,7 @@ const Layout = ({ children }: Props) => {
   `)
   return (
     <>
-      <Header title={data.site.siteMetadata.title} />
+      <Header title={data.site.siteMetadata.title} isBlog={isBlog} />
       <div className="global-wrapper">
         <main>{children}</main>
         <footer>
