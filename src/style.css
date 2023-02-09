@@ -335,3 +335,14 @@ a {
 .activated-menu div {
   color: #2563e1 !important;
 }
+
+:target::before {
+  content: "";
+  display: block;
+  height: 60px; /* fixed header height*/
+  margin: -60px 0 0; /* negative fixed header height */
+}
+
+.anchor.before {
+  top: auto;
+}
