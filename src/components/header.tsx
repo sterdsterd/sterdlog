@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 
 type Props = {
@@ -31,10 +32,26 @@ const Nav = styled.nav`
   backdrop-filter: saturate(180%) blur(10px);
 `
 
+const Logo = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 const Menu = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
+  text-decoration: none;
+`
+
+const MenuItem = styled.div`
+  color: black;
+  padding: 4px 12px;
+  transition: all 200ms;
+  font-weight: 600;
+
+  &:hover {
+    color: #2563e1;
+  }
 `
 
 const Header = (props: Props) => {
@@ -55,12 +72,27 @@ const Header = (props: Props) => {
 
   return (
     <Nav>
-      <Link to="/">{props.title}</Link>
+      <Link to="/">
+        <Logo>
+          <StaticImage
+            formats={["auto", "webp", "avif"]}
+            src="../images/sterdlogo-black-text.png"
+            height={28}
+            quality={100}
+            alt="Logo"
+          />
+          {}
+        </Logo>
+      </Link>
       <Menu>
         {menu.map((item: MenuType) => {
           return (
-            <Link to={`/${item.link}`} key={item.link}>
-              {item.title}
+            <Link
+              to={`/${item.link}`}
+              key={item.link}
+              activeClassName="activated-menu"
+            >
+              <MenuItem>{item.title}</MenuItem>
             </Link>
           )
         })}

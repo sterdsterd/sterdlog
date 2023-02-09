@@ -327,3 +327,11 @@ a:focus {
     list-style-position: inside;
   }
 }
+
+a {
+  text-decoration-line: none;
+}
+
+.activated-menu div {
+  color: #2563e1 !important;
+}
