@@ -1,17 +1,24 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import Header from "./header"
 
 type Props = {
-  location: Location
-  title: string
   children: React.ReactNode
 }
 
-const Layout = ({ location, title, children }: Props) => {
+const Layout = ({ children }: Props) => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
   return (
     <>
-      <Header />
+      <Header title={data.site.siteMetadata.title} />
       <div className="global-wrapper">
         <main>{children}</main>
         <footer>

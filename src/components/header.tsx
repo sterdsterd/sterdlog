@@ -2,7 +2,9 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
-type Props = {}
+type Props = {
+  title: string
+}
 
 const Nav = styled.nav`
   background-color: rgba(255, 255, 255, 0.25);
@@ -31,11 +33,11 @@ const Menu = styled.div`
 `
 
 const Header = (props: Props) => {
-  const menu = ["메인", "블로그"]
+  const menu = ["about", "blog"]
 
   return (
     <Nav>
-      <Link to="/">sterdlog</Link>
+      <Link to="/">{props.title}</Link>
       <Menu>
         {menu.map(item => {
           return (
