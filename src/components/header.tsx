@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
+import SterdLogoSVG from "./logoSVG"
 
 type Props = {
   title: string
@@ -74,14 +75,7 @@ const Header = (props: Props) => {
     <Nav>
       <Link to="/">
         <Logo>
-          <StaticImage
-            formats={["auto", "webp", "avif"]}
-            src="../images/sterdlogo-black-text.png"
-            height={28}
-            quality={100}
-            alt="Logo"
-          />
-          {}
+          <SterdLogoSVG height={28} />
         </Logo>
       </Link>
       <Menu>
