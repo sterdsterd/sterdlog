@@ -4,6 +4,15 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import {
+  Post,
+  Title,
+  ArticleInfo,
+  Nav,
+  NavItem,
+  NavItemSubtitle,
+  NavItemTitle,
+} from "./styles"
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post },
@@ -12,15 +21,11 @@ const BlogPostTemplate = ({
   const siteTitle = site.siteMetadata?.title || `Title`
 
   return (
-    <Layout location={location} title={siteTitle}>
-      <article
-        className="blog-post"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
+    <Layout>
+      <Post itemScope itemType="http://schema.org/Article">
         <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <Title itemProp="headline">{post.frontmatter.title}</Title>
+          <ArticleInfo>{post.frontmatter.date}</ArticleInfo>
         </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
@@ -30,33 +35,27 @@ const BlogPostTemplate = ({
         <footer>
           <Bio />
         </footer>
-      </article>
-      <nav className="blog-post-nav">
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
+      </Post>
+      <Nav>
+        {previous ? (
+          <Link to={previous.fields.slug} rel="prev">
+            <NavItem>
+              <NavItemSubtitle>이전 글</NavItemSubtitle>
+              <NavItemTitle>← {previous.frontmatter.title}</NavItemTitle>
+            </NavItem>
+          </Link>
+        ) : (
+          <div></div>
+        )}
+        {next && (
+          <Link to={next.fields.slug} rel="next">
+            <NavItem style={{ textAlign: "right" }}>
+              <NavItemSubtitle>다음 글</NavItemSubtitle>
+              <NavItemTitle>{next.frontmatter.title} →</NavItemTitle>
+            </NavItem>
+          </Link>
+        )}
+      </Nav>
     </Layout>
   )
 }
