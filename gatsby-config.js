@@ -19,6 +19,16 @@ module.exports = {
     social: {
       twitter: `kylemathews`,
     },
+    menu: [
+      {
+        title: `주인장 정보`,
+        link: `about`,
+      },
+      {
+        title: `블로그`,
+        link: `blog`,
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-image`,

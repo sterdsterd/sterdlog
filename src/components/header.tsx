@@ -1,9 +1,14 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 
 type Props = {
   title: string
+}
+
+type MenuType = {
+  title: string
+  link: string
 }
 
 const Nav = styled.nav`
@@ -33,16 +38,29 @@ const Menu = styled.div`
 `
 
 const Header = (props: Props) => {
-  const menu = ["about", "blog"]
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          menu {
+            title
+            link
+          }
+        }
+      }
+    }
+  `)
+
+  const menu: Array<MenuType> = data.site.siteMetadata.menu
 
   return (
     <Nav>
       <Link to="/">{props.title}</Link>
       <Menu>
-        {menu.map(item => {
+        {menu.map((item: MenuType) => {
           return (
-            <Link to={`/${item}`} key={item}>
-              {item}
+            <Link to={`/${item.link}`} key={item.link}>
+              {item.title}
             </Link>
           )
         })}
