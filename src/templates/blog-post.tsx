@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
+import { MDXProvider } from "@mdx-js/react"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -15,27 +16,32 @@ import {
 } from "./styles"
 
 const BlogPostTemplate = ({
-  data: { previous, next, site, markdownRemark: post },
+  data: { previous, next, site, mdx: post },
   location,
+  children,
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
 
   return (
     <Layout isBlog={true}>
-      <Post itemScope itemType="http://schema.org/Article">
-        <header>
-          <Title itemProp="headline">{post.frontmatter.title}</Title>
-          <ArticleInfo>{post.frontmatter.date}</ArticleInfo>
-        </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          itemProp="articleBody"
-        />
-        <hr />
-        <footer>
-          <Bio />
-        </footer>
-      </Post>
+      <MDXProvider>
+        <Post itemScope itemType="http://schema.org/Article">
+          <header>
+            <Title itemProp="headline">{post.frontmatter.title}</Title>
+            <ArticleInfo>{post.frontmatter.date}</ArticleInfo>
+          </header>
+          <section
+            // dangerouslySetInnerHTML={{ __html: post.html }}
+            itemProp="articleBody"
+          >
+            {children}
+          </section>
+          <hr />
+          <footer>
+            <Bio />
+          </footer>
+        </Post>
+      </MDXProvider>
       <Nav>
         {previous ? (
           <Link to={previous.fields.slug} rel="prev">
@@ -60,7 +66,7 @@ const BlogPostTemplate = ({
   )
 }
 
-export const Head = ({ data: { markdownRemark: post } }) => {
+export const Head = ({ data: { mdx: post } }) => {
   return (
     <Seo
       title={post.frontmatter.title}
@@ -82,17 +88,16 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(id: { eq: $id }) {
+    mdx(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
-      html
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
         description
       }
     }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
+    previous: mdx(id: { eq: $previousPostId }) {
       fields {
         slug
       }
@@ -100,7 +105,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    next: markdownRemark(id: { eq: $nextPostId }) {
+    next: mdx(id: { eq: $nextPostId }) {
       fields {
         slug
       }
