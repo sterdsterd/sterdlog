@@ -19,7 +19,7 @@ const Layout = ({ children, isBlog }: Props) => {
   `)
   return (
     <>
-      <Header title={data.site.siteMetadata.title} isBlog={isBlog} />
+      <Header isBlog={isBlog} />
       <div className="global-wrapper">
         <main>{children}</main>
         <footer>

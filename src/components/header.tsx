@@ -5,7 +5,6 @@ import styled from "styled-components"
 import SterdLogoSVG from "./logoSVG"
 
 type Props = {
-  title: string
   isBlog: boolean
 }
 
