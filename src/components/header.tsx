@@ -19,6 +19,7 @@ const NavContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
+  display: grid;
 `
 
 const Nav = styled.nav`
@@ -30,6 +31,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 50;
 
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
@@ -38,6 +40,11 @@ const Nav = styled.nav`
 const Logo = styled.div`
   display: flex;
   align-items: center;
+
+  transition: 0.2s all;
+  &:hover {
+    opacity: 0.75;
+  }
 `
 
 const Menu = styled.div`
@@ -59,11 +66,12 @@ const MenuItem = styled.div`
 
 const ScrollIndicator = styled.div`
   background-color: #2563e1;
-  height: 3px;
+  height: 1px;
   margin-top: -1px;
   width: 0;
   left: 0;
-  z-index: 150;
+  z-index: 80;
+  box-shadow: 0px 1px 4px rgba(37, 99, 225, 0.2);
 `
 
 const Header = (props: Props) => {
