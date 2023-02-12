@@ -140,4 +140,5 @@ module.exports = {
       },
     },
   ],
+  graphqlTypegen: true,
 }

@@ -15,20 +15,26 @@ import {
   NavItemTitle,
 } from "./styles"
 
+type Props = {
+  data: Queries.BlogPostBySlugQuery
+  location: Location
+  children: JSX.Element
+}
+
 const BlogPostTemplate = ({
   data: { previous, next, site, mdx: post },
   location,
   children,
-}) => {
-  const siteTitle = site.siteMetadata?.title || `Title`
+}: Props) => {
+  const siteTitle = site?.siteMetadata?.title || `Title`
 
   return (
     <Layout isBlog={true}>
       <MDXProvider>
         <Post itemScope itemType="http://schema.org/Article">
           <header>
-            <Title itemProp="headline">{post.frontmatter.title}</Title>
-            <ArticleInfo>{post.frontmatter.date}</ArticleInfo>
+            <Title itemProp="headline">{post?.frontmatter?.title}</Title>
+            <ArticleInfo>{post?.frontmatter?.date}</ArticleInfo>
           </header>
           <section
             // dangerouslySetInnerHTML={{ __html: post.html }}
@@ -44,20 +50,20 @@ const BlogPostTemplate = ({
       </MDXProvider>
       <Nav>
         {previous ? (
-          <Link to={previous.fields.slug} rel="prev">
+          <Link to={previous.fields?.slug!} rel="prev">
             <NavItem>
               <NavItemSubtitle>이전 글</NavItemSubtitle>
-              <NavItemTitle>← {previous.frontmatter.title}</NavItemTitle>
+              <NavItemTitle>← {previous.frontmatter?.title}</NavItemTitle>
             </NavItem>
           </Link>
         ) : (
           <div></div>
         )}
         {next && (
-          <Link to={next.fields.slug} rel="next">
+          <Link to={next.fields?.slug!} rel="next">
             <NavItem style={{ textAlign: "right" }}>
               <NavItemSubtitle>다음 글</NavItemSubtitle>
-              <NavItemTitle>{next.frontmatter.title} →</NavItemTitle>
+              <NavItemTitle>{next.frontmatter?.title} →</NavItemTitle>
             </NavItem>
           </Link>
         )}
@@ -66,11 +72,15 @@ const BlogPostTemplate = ({
   )
 }
 
-export const Head = ({ data: { mdx: post } }) => {
+export const Head = ({
+  data: { mdx: post },
+}: {
+  data: Queries.BlogPostBySlugQuery
+}) => {
   return (
     <Seo
-      title={post.frontmatter.title}
-      description={post.frontmatter.description || post.excerpt}
+      title={post?.frontmatter?.title!}
+      description={post?.frontmatter?.description! || post?.excerpt!}
     />
   )
 }
@@ -93,7 +103,7 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY년 M월 D일")
         description
       }
     }

@@ -7,8 +7,13 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
+type Props = {
+  data: Queries.PostListPageQuery
+  location: Location
+}
+
+const BlogIndex = ({ data, location }: Props) => {
+  const siteTitle = data.site?.siteMetadata?.title || `Title`
   const posts = data.allMdx.nodes
 
   if (posts.length === 0) {
@@ -27,11 +32,11 @@ const BlogIndex = ({ data, location }) => {
     <Layout isBlog={true}>
       <PostWrapper>
         {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
+          const title = post.frontmatter?.title || post.fields?.slug
 
           return (
-            <Link to={post.fields.slug} itemProp="url">
-              <Tile key={post.fields.slug}>
+            <Link to={post.fields?.slug!} itemProp="url">
+              <Tile key={post.fields?.slug!}>
                 <article itemScope itemType="http://schema.org/Article">
                   <StaticImage
                     formats={["auto", "webp", "avif"]}
@@ -48,15 +53,12 @@ const BlogIndex = ({ data, location }) => {
                   <TileContents>
                     <header>
                       <TileTitle itemProp="headline">{title}</TileTitle>
-                      <small>{post.frontmatter.date}</small>
+                      <small>{post.frontmatter?.date}</small>
                     </header>
                     <section>
-                      <TileDescription
-                        dangerouslySetInnerHTML={{
-                          __html: post.frontmatter.description || post.excerpt,
-                        }}
-                        itemProp="description"
-                      />
+                      <TileDescription itemProp="description">
+                        {post.frontmatter?.description || post.excerpt}
+                      </TileDescription>
                     </section>
                   </TileContents>
                 </article>
@@ -127,7 +129,7 @@ const TileDescription = styled.p`
 export const Head = () => <Seo title="모든 포스트" />
 
 export const pageQuery = graphql`
-  {
+  query PostListPage {
     site {
       siteMetadata {
         title
@@ -140,7 +142,7 @@ export const pageQuery = graphql`
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "YYYY년 M월 D일")
           title
           description
         }
