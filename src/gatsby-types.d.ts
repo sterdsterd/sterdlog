@@ -743,6 +743,7 @@ type FloatQueryOperatorInput = {
 type Frontmatter = {
   readonly date: Maybe<Scalars['Date']>;
   readonly description: Maybe<Scalars['String']>;
+  readonly emoji: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
 };
 
@@ -757,18 +758,21 @@ type Frontmatter_dateArgs = {
 type FrontmatterFieldSelector = {
   readonly date: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
+  readonly emoji: InputMaybe<FieldSelectorEnum>;
   readonly title: InputMaybe<FieldSelectorEnum>;
 };
 
 type FrontmatterFilterInput = {
   readonly date: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
+  readonly emoji: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
 };
 
 type FrontmatterSortInput = {
   readonly date: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
+  readonly emoji: InputMaybe<SortOrderEnum>;
   readonly title: InputMaybe<SortOrderEnum>;
 };
 
@@ -1549,6 +1553,7 @@ type MdxFilterListInput = {
 type MdxFrontmatter = {
   readonly date: Maybe<Scalars['Date']>;
   readonly description: Maybe<Scalars['String']>;
+  readonly emoji: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
 };
 
@@ -1563,18 +1568,21 @@ type MdxFrontmatter_dateArgs = {
 type MdxFrontmatterFieldSelector = {
   readonly date: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
+  readonly emoji: InputMaybe<FieldSelectorEnum>;
   readonly title: InputMaybe<FieldSelectorEnum>;
 };
 
 type MdxFrontmatterFilterInput = {
   readonly date: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
+  readonly emoji: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
 };
 
 type MdxFrontmatterSortInput = {
   readonly date: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
+  readonly emoji: InputMaybe<SortOrderEnum>;
   readonly title: InputMaybe<SortOrderEnum>;
 };
 
@@ -2888,7 +2896,7 @@ type NotFoundPageQuery = { readonly site: { readonly siteMetadata: { readonly ti
 type PostListPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PostListPageQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null, readonly allMdx: { readonly nodes: ReadonlyArray<{ readonly excerpt: string | null, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null } | null }> } };
+type PostListPageQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null, readonly allMdx: { readonly nodes: ReadonlyArray<{ readonly excerpt: string | null, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null, readonly emoji: string | null } | null }> } };
 
 
 }

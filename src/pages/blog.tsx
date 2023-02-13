@@ -19,17 +19,17 @@ const BlogIndex = ({ data, location }: Props) => {
   if (posts.length === 0) {
     return (
       <Layout isBlog={true}>
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
+        <p>게시물이 없습니다.</p>
       </Layout>
     )
   }
 
   return (
     <Layout isBlog={true}>
+      <div style={{ paddingLeft: "1rem" }}>
+        <h1 style={{ marginBottom: "0.5rem" }}>모든 글</h1>
+        <p>총 {posts.length}개의 글이 있어요</p>
+      </div>
       <PostWrapper>
         {posts.map(post => {
           const title = post.frontmatter?.title || post.fields?.slug
@@ -38,7 +38,7 @@ const BlogIndex = ({ data, location }: Props) => {
             <Link to={post.fields?.slug!} itemProp="url">
               <Tile key={post.fields?.slug!}>
                 <article itemScope itemType="http://schema.org/Article">
-                  <StaticImage
+                  {/* <StaticImage
                     formats={["auto", "webp", "avif"]}
                     src="../images/gatsby-icon.png"
                     quality={100}
@@ -48,10 +48,10 @@ const BlogIndex = ({ data, location }: Props) => {
                       width: "100%",
                       height: "250px",
                     }}
-                  />
-
+                  /> */}
                   <TileContents>
                     <header>
+                      <Emoji>{post.frontmatter?.emoji}</Emoji>
                       <TileTitle itemProp="headline">{title}</TileTitle>
                       <small>{post.frontmatter?.date}</small>
                     </header>
@@ -78,7 +78,7 @@ const PostWrapper = styled.ol`
   grid-gap: 1rem;
   gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
-  margin-top: 3rem;
+  margin-top: 2rem;
   list-style: none;
 
   @media screen and (max-width: 768px) {
@@ -91,9 +91,16 @@ const Tile = styled.div`
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.4rem;
+  box-shadow: 0 0.375rem 0.625rem rgba(0, 0, 0, 0.05);
   overflow: hidden;
   position: relative;
   color: black;
+  transition: all 200ms;
+  height: 100%;
+
+  &:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
 
   &:hover h2 {
     color: #2563e1;
@@ -107,7 +114,7 @@ const Tile = styled.div`
 `
 
 const TileContents = styled.div`
-  padding: 2rem;
+  padding: 1.625rem 1.75rem;
 `
 
 const TileTitle = styled.h2`
@@ -119,6 +126,12 @@ const TileTitle = styled.h2`
 const TileDescription = styled.p`
   margin: 0;
   padding-top: 1rem;
+`
+
+const Emoji = styled.p`
+  margin-top: -1rem;
+  margin-bottom: 0;
+  font-size: 4rem;
 `
 
 /**
@@ -145,6 +158,7 @@ export const pageQuery = graphql`
           date(formatString: "YYYY년 M월 D일")
           title
           description
+          emoji
         }
       }
     }
