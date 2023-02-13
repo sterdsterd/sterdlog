@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Header from "./header"
+import Footer from "./footer"
 
 type Props = {
   children: React.ReactNode
@@ -22,11 +23,7 @@ const Layout = ({ children, isBlog }: Props) => {
       <Header isBlog={isBlog} />
       <div className="global-wrapper">
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
+        <Footer />
       </div>
     </>
   )
