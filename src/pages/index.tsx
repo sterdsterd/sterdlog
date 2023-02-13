@@ -31,7 +31,7 @@ const LogoContainer = styled.div`
   position: relative;
   width: 10rem;
   height: calc(10rem * 1.25);
-  animation: ${scaleAnimation} 1s ease;
+  animation: ${scaleAnimation} 1s cubic-bezier(0.16, 1, 0.3, 1);
 `
 
 const Upper = styled.div`
@@ -51,7 +51,7 @@ const Lower = styled.div`
 `
 
 const Blog = () => {
-  const [angle, setAngle] = useState<number>(0)
+  const [angle, setAngle] = useState<number>(-0.4)
 
   const linearToEase = (n: number) => {
     if (n < 0) return 0
