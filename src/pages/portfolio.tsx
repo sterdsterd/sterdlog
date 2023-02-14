@@ -86,9 +86,8 @@ const Portfolio = ({ data, location }: Props) => {
                 alt="Profile picture"
                 style={{
                   backgroundSize: "cover",
-                  width: "100%",
-                  margin: "1.5rem 0",
-                  borderRadius: "1rem",
+                  width: "calc(100% + 3.5rem)",
+                  margin: "1.5rem -1.75rem",
                 }}
               />
               <ChipContainer>
