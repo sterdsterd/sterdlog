@@ -21,8 +21,8 @@ module.exports = {
     },
     menu: [
       {
-        title: `주인장 정보`,
-        link: `about`,
+        title: `포트폴리오`,
+        link: `portfolio`,
       },
       {
         title: `블로그`,
