@@ -65,7 +65,6 @@ const Blog = () => {
     }, 1)
 
     return () => {
-      console.log("angle dismounted")
       clearInterval(c)
     }
   }, [angle])

@@ -118,7 +118,6 @@ const Header = (props: Props) => {
       window.addEventListener("scroll", updateScrollIndicator)
 
       return () => {
-        console.log("Unmounted")
         window.removeEventListener("scroll", updateScrollIndicator)
       }
     }, [])
