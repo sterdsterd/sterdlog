@@ -1,16 +1,26 @@
 import React from "react"
+import { graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-type Props = {}
+type Props = {
+  data: Queries.PortfolioListQuery
+  location: Location
+}
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
 
 const Card = styled.div`
   background-color: #fff;
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.4rem;
+  border-radius: 1rem;
   box-shadow: 0 0.375rem 0.625rem rgba(0, 0, 0, 0.05);
   overflow: hidden;
   position: relative;
@@ -18,7 +28,7 @@ const Card = styled.div`
   transition: all 200ms;
   height: 100%;
   width: 100%;
-  padding: 2rem;
+  padding: 1.625rem 1.75rem;
   flex-direction: column;
 
   /* &:hover {
@@ -38,7 +48,7 @@ const ProjectDescription = styled.p`
 const ChipContainer = styled.div`
   display: flex;
   gap: 0.8rem;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
 `
 
 const Chip = styled.span`
@@ -49,43 +59,77 @@ const Chip = styled.span`
   border-radius: 0.4rem;
 `
 
-const Portfolio = () => {
+const Portfolio = ({ data, location }: Props) => {
+  var items = data.allFile.nodes.filter(it => it.childMdx)
+
   return (
     <Layout isBlog={false}>
       <div style={{ paddingLeft: "1rem" }}>
         <h1 style={{ marginBottom: "0.5rem" }}>포트폴리오</h1>
-        <p>Lorem ipsum</p>
+        <p>
+          <a href="https://www.github.com/sterdsterd">Github</a>에서 더 많은
+          프로젝트를 보실 수 있어요
+        </p>
       </div>
-      <Card>
-        <span>2023년 2월</span>
-        <ProjectTitle>개발 블로그</ProjectTitle>
-        <StaticImage
-          formats={["auto", "webp", "avif"]}
-          src="https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
-          quality={100}
-          alt="Profile picture"
-          style={{
-            backgroundSize: "cover",
-            width: "100%",
-            margin: "1rem 0",
-            borderRadius: "1rem",
-          }}
-        />
-        <ChipContainer>
-          <Chip>Gatsby</Chip>
-          <Chip>React</Chip>
-          <Chip>Typescript</Chip>
-        </ChipContainer>
-        <ProjectDescription>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. In
-          pellentesque massa placerat duis. Ridiculus mus mauris vitae ultricies
-          leo integer.
-        </ProjectDescription>
-      </Card>
+      <CardContainer>
+        {items.map(item => {
+          var mdx = item.childMdx!
+
+          return (
+            <Card key={mdx.fields?.slug}>
+              <span>{mdx.frontmatter?.date}</span>
+              <ProjectTitle>{mdx.frontmatter?.title}</ProjectTitle>
+              <StaticImage
+                formats={["auto", "webp", "avif"]}
+                src="https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+                quality={100}
+                alt="Profile picture"
+                style={{
+                  backgroundSize: "cover",
+                  width: "100%",
+                  margin: "1.5rem 0",
+                  borderRadius: "1rem",
+                }}
+              />
+              <ChipContainer>
+                {mdx.frontmatter?.stacks?.map(it => {
+                  return <Chip key={it}>{it}</Chip>
+                })}
+              </ChipContainer>
+              <ProjectDescription>
+                {mdx.frontmatter?.description}
+              </ProjectDescription>
+            </Card>
+          )
+        })}
+      </CardContainer>
     </Layout>
   )
 }
 
 export default Portfolio
 export const Head = () => <Seo title="포트폴리오" />
+
+export const pageQuery = graphql`
+  query PortfolioList {
+    allFile(
+      filter: { sourceInstanceName: { eq: "portfolio" } }
+      sort: { childrenMdx: { frontmatter: { date: DESC } } }
+    ) {
+      nodes {
+        childMdx {
+          excerpt
+          fields {
+            slug
+          }
+          frontmatter {
+            date(formatString: "YYYY년 M월")
+            title
+            stacks
+            description
+          }
+        }
+      }
+    }
+  }
+`

@@ -13,8 +13,7 @@ type Props = {
 }
 
 const BlogIndex = ({ data, location }: Props) => {
-  const siteTitle = data.site?.siteMetadata?.title || `Title`
-  const posts = data.allMdx.nodes
+  const posts = data.allFile.nodes.filter(post => post.childMdx)
 
   if (posts.length === 0) {
     return (
@@ -32,32 +31,23 @@ const BlogIndex = ({ data, location }: Props) => {
       </div>
       <PostWrapper>
         {posts.map(post => {
-          const title = post.frontmatter?.title || post.fields?.slug
+          var mdx = post.childMdx!
+
+          const title = mdx.frontmatter?.title || mdx.fields?.slug
 
           return (
-            <Link to={post.fields?.slug!} itemProp="url">
-              <Tile key={post.fields?.slug!}>
+            <Link to={mdx.fields?.slug!} itemProp="url" key={mdx.fields?.slug!}>
+              <Tile>
                 <article itemScope itemType="http://schema.org/Article">
-                  {/* <StaticImage
-                    formats={["auto", "webp", "avif"]}
-                    src="../images/gatsby-icon.png"
-                    quality={100}
-                    alt="Profile picture"
-                    style={{
-                      backgroundSize: "cover",
-                      width: "100%",
-                      height: "250px",
-                    }}
-                  /> */}
                   <TileContents>
                     <header>
-                      <Emoji>{post.frontmatter?.emoji}</Emoji>
+                      <Emoji>{mdx.frontmatter?.emoji}</Emoji>
                       <TileTitle itemProp="headline">{title}</TileTitle>
-                      <small>{post.frontmatter?.date}</small>
+                      <small>{mdx.frontmatter?.date}</small>
                     </header>
                     <section>
                       <TileDescription itemProp="description">
-                        {post.frontmatter?.description || post.excerpt}
+                        {mdx.frontmatter?.description || mdx.excerpt}
                       </TileDescription>
                     </section>
                   </TileContents>
@@ -75,7 +65,6 @@ export default BlogIndex
 
 const PostWrapper = styled.ol`
   display: grid;
-  grid-gap: 1rem;
   gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
   margin-top: 2rem;
@@ -90,7 +79,7 @@ const Tile = styled.div`
   background-color: #fff;
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.4rem;
+  border-radius: 1rem;
   box-shadow: 0 0.375rem 0.625rem rgba(0, 0, 0, 0.05);
   overflow: hidden;
   position: relative;
@@ -143,22 +132,22 @@ export const Head = () => <Seo title="모든 포스트" />
 
 export const pageQuery = graphql`
   query PostListPage {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMdx(sort: { frontmatter: { date: DESC } }) {
+    allFile(
+      filter: { sourceInstanceName: { eq: "blog" } }
+      sort: { childrenMdx: { frontmatter: { date: DESC } } }
+    ) {
       nodes {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "YYYY년 M월 D일")
-          title
-          description
-          emoji
+        childMdx {
+          excerpt
+          fields {
+            slug
+          }
+          frontmatter {
+            date(formatString: "YYYY년 M월 D일")
+            title
+            description
+            emoji
+          }
         }
       }
     }
