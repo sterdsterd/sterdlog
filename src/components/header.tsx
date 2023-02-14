@@ -39,6 +39,8 @@ const Nav = styled.nav`
 `
 
 const Logo = styled.div`
+  display: flex;
+  align-items: center;
   transition: 0.2s all;
   &:hover {
     opacity: 0.75;
