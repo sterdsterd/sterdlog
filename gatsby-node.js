@@ -19,14 +19,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Get all markdown blog posts sorted by date
   const result = await graphql(`
     {
-      allMdx(sort: { frontmatter: { date: ASC } }, limit: 1000) {
+      allFile(
+        filter: { sourceInstanceName: { eq: "blog" } }
+        sort: { childrenMdx: { frontmatter: { date: ASC } } }
+        limit: 1000
+      ) {
         nodes {
-          id
-          fields {
-            slug
-          }
-          internal {
-            contentFilePath
+          childMdx {
+            id
+            fields {
+              slug
+            }
+            internal {
+              contentFilePath
+            }
           }
         }
       }
@@ -41,7 +47,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allMdx.nodes
+  const posts = result.data.allFile.nodes.filter(it => it.childMdx)
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -49,14 +55,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   if (posts.length > 0) {
     posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+      const previousPostId = index === 0 ? null : posts[index - 1].childMdx.id
+      const nextPostId =
+        index === posts.length - 1 ? null : posts[index + 1].childMdx.id
 
       createPage({
-        path: post.fields.slug,
-        component: `${blogPost}?__contentFilePath=${post.internal.contentFilePath}`,
+        path: post.childMdx.fields.slug,
+        component: `${blogPost}?__contentFilePath=${post.childMdx.internal.contentFilePath}`,
         context: {
-          id: post.id,
+          id: post.childMdx.id,
           previousPostId,
           nextPostId,
         },
