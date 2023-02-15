@@ -120,6 +120,7 @@ const TileDescription = styled.p`
 const Emoji = styled.p`
   margin-top: -1rem;
   margin-bottom: 0;
+  margin-left: -0.35rem;
   font-size: 4rem;
 `
 

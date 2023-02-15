@@ -1,5 +1,6 @@
 /* CSS Custom Properties Definitions */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+@import url("https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css");
 
 :root {
   --maxWidth-none: "none";
@@ -29,8 +30,8 @@
   --spacing-24: 6rem;
   --spacing-32: 8rem;
   --fontFamily: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
+    sans-serif, "Tossface", "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
   --font-body: var(--fontFamily);
   --font-heading: var(--fontFamily);
   --fontWeight-normal: 400;
