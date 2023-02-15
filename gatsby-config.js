@@ -15,7 +15,7 @@ module.exports = {
       summary: `who lives and works in San Francisco building useful things.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    siteUrl: `https://sterd.dev/`,
     social: {
       twitter: `kylemathews`,
     },
@@ -146,6 +146,7 @@ module.exports = {
         // Add any options here
       },
     },
+    `gatsby-plugin-netlify`,
   ],
   graphqlTypegen: true,
 }
