@@ -94,28 +94,34 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map(node => {
-                return Object.assign({}, node.frontmatter, {
-                  description: node.excerpt,
-                  date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + node.fields.slug,
-                  custom_elements: [{ "content:encoded": node.html }],
+            serialize: ({ query: { site, allFile } }) => {
+              return allFile.nodes
+                .filter(it => it.childMdx)
+                .map(node => {
+                  return Object.assign({}, node.childMdx.frontmatter, {
+                    description: node.childMdx.excerpt,
+                    date: node.childMdx.frontmatter.date,
+                    url: site.siteMetadata.siteUrl + node.childMdx.fields.slug,
+                    guid: site.siteMetadata.siteUrl + node.childMdx.fields.slug,
+                    //custom_elements: [{ "content:encoded": node.html }],
+                  })
                 })
-              })
             },
             query: `{
-              allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+              allFile(
+                filter: { sourceInstanceName: { eq: "blog" } }
+                sort: { childrenMdx: { frontmatter: { date: DESC } } }
+              ) {
                 nodes {
-                  excerpt
-                  html
-                  fields {
-                    slug
-                  }
-                  frontmatter {
-                    title
-                    date
+                  childMdx {
+                    excerpt
+                    fields {
+                      slug
+                    }
+                    frontmatter {
+                      date(formatString: "YYYY년 M월 D일")
+                      title
+                    }
                   }
                 }
               }
