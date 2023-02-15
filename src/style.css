@@ -29,8 +29,8 @@
   --spacing-20: 5rem;
   --spacing-24: 6rem;
   --spacing-32: 8rem;
-  --fontFamily: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont,
-    sans-serif, "Tossface", "Apple Color Emoji", "Segoe UI Emoji",
+  --fontFamily: "Pretendard", "Tossface", system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
   --font-body: var(--fontFamily);
   --font-heading: var(--fontFamily);
