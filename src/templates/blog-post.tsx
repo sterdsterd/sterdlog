@@ -43,9 +43,7 @@ const BlogPostTemplate = ({
             {children}
           </section>
           <hr />
-          <footer>
-            <Bio />
-          </footer>
+          <footer>{/* <Bio /> */}</footer>
         </Post>
       </MDXProvider>
       <Nav>
