@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -30,10 +30,6 @@ const Card = styled.div`
   width: 100%;
   padding: 1.625rem 1.75rem;
   flex-direction: column;
-
-  /* &:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  } */
 `
 
 const ProjectTitle = styled.h2`
@@ -61,6 +57,7 @@ const Chip = styled.span`
 
 const Portfolio = ({ data, location }: Props) => {
   var items = data.allFile.nodes.filter(it => it.childMdx)
+  console.log(items)
 
   return (
     <Layout isBlog={false}>
@@ -79,19 +76,18 @@ const Portfolio = ({ data, location }: Props) => {
             <Card key={mdx.fields?.slug}>
               <span>{mdx.frontmatter?.date}</span>
               <ProjectTitle>{mdx.frontmatter?.title}</ProjectTitle>
-              <StaticImage
-                formats={["auto", "webp", "avif"]}
-                src="https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
-                quality={100}
-                alt="Profile picture"
+              <GatsbyImage
+                image={getImage(mdx.frontmatter?.thumbnail)}
+                alt="a"
                 style={{
                   backgroundSize: "cover",
                   width: "calc(100% + 3.5rem)",
+                  height: "100%",
                   margin: "1.5rem -1.75rem",
                 }}
               />
               <ChipContainer>
-                {mdx.frontmatter?.stacks?.map(it => {
+                {mdx.frontmatter?.tags?.map(it => {
                   return <Chip key={it}>{it}</Chip>
                 })}
               </ChipContainer>
@@ -124,8 +120,16 @@ export const pageQuery = graphql`
           frontmatter {
             date(formatString: "YYYY년 M월")
             title
-            stacks
+            tags
             description
+            thumbnail {
+              childImageSharp {
+                gatsbyImageData(
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
           }
         }
       }

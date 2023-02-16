@@ -127,7 +127,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       description: String
       date: Date @dateformat
       emoji: String
-      stacks: [String]
+      tags: [String]
+      thumbnail: File
     }
 
     type Fields {
