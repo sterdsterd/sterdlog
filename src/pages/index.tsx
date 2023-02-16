@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled, { keyframes } from "styled-components"
-import Header from "../components/header"
+import Header from "../components/NavigationBar/header"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
-import Header from "./header"
+import Header from "./NavigationBar/header"
 import Footer from "./footer"
 
 type Props = {
