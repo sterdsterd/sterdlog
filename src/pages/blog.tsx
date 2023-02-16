@@ -40,16 +40,14 @@ const BlogIndex = ({ data, location }: Props) => {
               <Tile>
                 <article itemScope itemType="http://schema.org/Article">
                   <TileContents>
-                    <header>
-                      <Emoji>{mdx.frontmatter?.emoji}</Emoji>
+                    <Emoji>{mdx.frontmatter?.emoji}</Emoji>
+                    <div>
                       <TileTitle itemProp="headline">{title}</TileTitle>
                       <small>{mdx.frontmatter?.date}</small>
-                    </header>
-                    <section>
                       <TileDescription itemProp="description">
                         {mdx.frontmatter?.description || mdx.excerpt}
                       </TileDescription>
-                    </section>
+                    </div>
                   </TileContents>
                 </article>
               </Tile>
@@ -103,7 +101,14 @@ const Tile = styled.div`
 `
 
 const TileContents = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 1.625rem 1.75rem;
+
+  @media screen and (max-width: 768px) {
+    align-items: center;
+    flex-direction: row;
+  }
 `
 
 const TileTitle = styled.h2`
@@ -114,7 +119,14 @@ const TileTitle = styled.h2`
 
 const TileDescription = styled.p`
   margin: 0;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
+  @media screen and (max-width: 768px) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 `
 
 const Emoji = styled.p`
@@ -122,6 +134,12 @@ const Emoji = styled.p`
   margin-bottom: 0;
   margin-left: -0.35rem;
   font-size: 4rem;
+
+  @media screen and (max-width: 768px) {
+    font-size: 3.5rem;
+    margin-top: 0;
+    margin-right: 1.2rem;
+  }
 `
 
 /**
