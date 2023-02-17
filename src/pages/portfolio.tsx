@@ -94,6 +94,9 @@ const Portfolio = ({ data, location }: Props) => {
               <ProjectDescription>
                 {mdx.frontmatter?.description}
               </ProjectDescription>
+              <div style={{ marginLeft: "auto", marginRight: "0" }}>
+                <Button>자세히 보기 →</Button>
+              </div>
             </Card>
           )
         })}
@@ -134,5 +137,20 @@ export const pageQuery = graphql`
         }
       }
     }
+  }
+`
+
+const Button = styled.button`
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  transition: all 0.2s;
+  padding: 0.7rem 0.8rem;
+  margin-right: -0.625rem;
+  margin-bottom: -0.5rem;
+  font-weight: 600;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `
