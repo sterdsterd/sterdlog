@@ -36,12 +36,7 @@ const BlogPostTemplate = ({
             <Title itemProp="headline">{post?.frontmatter?.title}</Title>
             <ArticleInfo>{post?.frontmatter?.date}</ArticleInfo>
           </header>
-          <section
-            // dangerouslySetInnerHTML={{ __html: post.html }}
-            itemProp="articleBody"
-          >
-            {children}
-          </section>
+          <section itemProp="articleBody">{children}</section>
           <hr />
           <footer>{/* <Bio /> */}</footer>
         </Post>

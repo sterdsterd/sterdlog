@@ -347,3 +347,12 @@ a {
 .anchor.before {
   top: auto;
 }
+
+@keyframes modal-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

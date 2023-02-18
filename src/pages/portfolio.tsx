@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import PortfolioModal from "../components/PortfolioModal"
 
 type Props = {
   data: Queries.PortfolioListQuery
@@ -71,6 +72,7 @@ const Portfolio = ({ data, location }: Props) => {
       <CardContainer>
         {items.map(item => {
           var mdx = item.childMdx!
+          var [isModalVisible, setModalVisible] = useState<boolean>(false)
 
           return (
             <Card key={mdx.fields?.slug}>
@@ -95,8 +97,17 @@ const Portfolio = ({ data, location }: Props) => {
                 {mdx.frontmatter?.description}
               </ProjectDescription>
               <div style={{ marginLeft: "auto", marginRight: "0" }}>
-                <Button>자세히 보기 →</Button>
+                <Button onClick={() => setModalVisible(true)}>
+                  자세히 보기 →
+                </Button>
               </div>
+              <PortfolioModal
+                visible={isModalVisible}
+                setVisible={setModalVisible}
+                header={mdx.frontmatter?.title!}
+              >
+                {mdx?.body}
+              </PortfolioModal>
             </Card>
           )
         })}
@@ -117,6 +128,7 @@ export const pageQuery = graphql`
       nodes {
         childMdx {
           excerpt
+          body
           fields {
             slug
           }
