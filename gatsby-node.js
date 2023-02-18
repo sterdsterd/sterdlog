@@ -9,6 +9,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 
 // Define the template for blog post
 const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
+const portfolioModal = path.resolve(`./src/components/PortfolioContent.tsx`)
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -17,7 +18,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   // Get all markdown blog posts sorted by date
-  const result = await graphql(`
+  const blogResult = await graphql(`
     {
       allFile(
         filter: { sourceInstanceName: { eq: "blog" } }
@@ -39,15 +40,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   `)
 
-  if (result.errors) {
+  if (blogResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
-      result.errors
+      blogResult.errors
     )
     return
   }
 
-  const posts = result.data.allFile.nodes.filter(it => it.childMdx)
+  const posts = blogResult.data.allFile.nodes.filter(it => it.childMdx)
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -66,6 +67,51 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           id: post.childMdx.id,
           previousPostId,
           nextPostId,
+        },
+      })
+    })
+  }
+
+  // Portfolio Posts
+  const portfolioResult = await graphql(`
+    {
+      allFile(
+        filter: { sourceInstanceName: { eq: "portfolio" } }
+        sort: { childrenMdx: { frontmatter: { date: ASC } } }
+        limit: 1000
+      ) {
+        nodes {
+          childMdx {
+            id
+            fields {
+              slug
+            }
+            internal {
+              contentFilePath
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (portfolioResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your portfolio posts`,
+      portfolioResult.errors
+    )
+    return
+  }
+
+  const modals = portfolioResult.data.allFile.nodes.filter(it => it.childMdx)
+
+  if (modals.length > 0) {
+    modals.forEach((post, index) => {
+      createPage({
+        path: `/portfolio${post.childMdx.fields.slug}`,
+        component: `${portfolioModal}?__contentFilePath=${post.childMdx.internal.contentFilePath}`,
+        context: {
+          id: post.childMdx.id,
         },
       })
     })

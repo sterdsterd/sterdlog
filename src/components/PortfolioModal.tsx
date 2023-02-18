@@ -1,16 +1,19 @@
-import React, { Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
+import fs from "node:fs/promises"
+import { compile } from "@mdx-js/mdx"
 import styled from "styled-components"
 import { IconButton } from "./NavigationBar/style"
+import { graphql } from "gatsby"
+import { MDXProvider } from "@mdx-js/react"
 
 type Props = {
-  visible: boolean
-  children?: React.ReactNode
+  isVisible: boolean
   setVisible: Dispatch<SetStateAction<boolean>>
-  header: string
+  slug: string
 }
 
-const Modal = styled.div.attrs((props: { visible: boolean }) => props)`
-  display: ${props => (props.visible ? "flex" : "none")};
+const Modal = styled.div.attrs((props: { isVisible: boolean }) => props)`
+  display: ${props => (props.isVisible ? "flex" : "none")};
   position: fixed;
   top: 0;
   right: 0;
@@ -20,7 +23,7 @@ const Modal = styled.div.attrs((props: { visible: boolean }) => props)`
   background-color: rgba(0, 0, 0, 0.4);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
-  ${props => (props.visible ? "align-items: center" : "")};
+  ${props => (props.isVisible ? "align-items: center" : "")};
   animation: modal-show 0.2s;
 `
 
@@ -33,29 +36,46 @@ const ModalContents = styled.section`
   transition: all 0.2s;
   overflow: hidden;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  padding: 2rem;
   animation: modal-show 0.2s;
 `
 
-const Title = styled.h1`
-  margin-top: 1rem;
-  font-size: 48px;
-  font-weight: 700;
-  text-align: center;
+const ModalBody = styled.iframe`
+  width: 100%;
+  border: none;
 `
 
 const PortfolioModal = (props: Props) => {
+  const [frameHeight, setFrameHeight] = useState<string>()
+  useEffect(() => {
+    const t = setInterval(() => {
+      const frame: HTMLIFrameElement = document.getElementById(
+        "modalBody"
+      ) as HTMLIFrameElement
+      if (frame !== null) {
+        setFrameHeight(frame?.contentWindow?.document.body.scrollHeight + "px")
+        console.log(
+          "height",
+          frame?.contentWindow?.document.body.scrollHeight + "px"
+        )
+      }
+    }, 500)
+
+    return () => {
+      clearInterval(t)
+    }
+  }, [props.isVisible])
+
   return (
-    <Modal visible={props.visible}>
-      {props.visible ? (
+    <Modal isVisible={props.isVisible}>
+      {props.isVisible ? (
         <ModalContents>
           <header style={{ display: "flex", flexDirection: "column" }}>
             <IconButton
               onClick={() => props.setVisible(false)}
               style={{
                 marginLeft: "auto",
-                marginRight: "-1rem",
-                marginTop: "-1rem",
+                marginRight: "1rem",
+                marginTop: "1rem",
               }}
             >
               <svg
@@ -67,25 +87,12 @@ const PortfolioModal = (props: Props) => {
                 <path d="M480 631.566 276.783 834.783Q264.957 846.609 249 846.609t-27.783-11.826Q209.391 822.957 209.391 807t11.826-27.783L424.434 576 221.217 372.783Q209.391 360.957 209.391 345t11.826-27.783q11.826-11.826 27.783-11.826t27.783 11.826L480 520.434l203.217-203.217q11.826-11.826 27.783-11.826t27.783 11.826q11.826 11.826 11.826 27.783t-11.826 27.783L535.566 576l203.217 203.217q11.826 11.826 11.826 27.783t-11.826 27.783Q726.957 846.609 711 846.609t-27.783-11.826L480 631.566Z" />
               </svg>
             </IconButton>
-            <Title>{props.header}</Title>
           </header>
-          <div
-            style={{
-              width: "calc(100% + 4rem)",
-              wordBreak: "break-all",
-              overflowY: "scroll",
-              overflowX: "hidden",
-              margin: "0 -2rem",
-              padding: "0 2rem",
-            }}
-          >
-            <section
-              style={{ maxHeight: "calc(80vh - 7rem)" }}
-              itemProp="articleBody"
-            >
-              {props.children}
-            </section>
-          </div>
+          <ModalBody
+            id="modalBody"
+            src={`.${props.slug}`}
+            style={{ height: `calc(2rem + ${frameHeight})` }}
+          ></ModalBody>
         </ModalContents>
       ) : null}
     </Modal>

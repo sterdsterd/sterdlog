@@ -58,7 +58,6 @@ const Chip = styled.span`
 
 const Portfolio = ({ data, location }: Props) => {
   var items = data.allFile.nodes.filter(it => it.childMdx)
-  console.log(items)
 
   return (
     <Layout isBlog={false}>
@@ -102,12 +101,10 @@ const Portfolio = ({ data, location }: Props) => {
                 </Button>
               </div>
               <PortfolioModal
-                visible={isModalVisible}
+                isVisible={isModalVisible}
                 setVisible={setModalVisible}
-                header={mdx.frontmatter?.title!}
-              >
-                {mdx?.body}
-              </PortfolioModal>
+                slug={mdx.fields?.slug}
+              />
             </Card>
           )
         })}
@@ -127,6 +124,9 @@ export const pageQuery = graphql`
     ) {
       nodes {
         childMdx {
+          internal {
+            contentFilePath
+          }
           excerpt
           body
           fields {
