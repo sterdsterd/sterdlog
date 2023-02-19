@@ -1,10 +1,16 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import {
+  GatsbyImage,
+  getImage,
+  IGatsbyImageData,
+  ImageDataLike,
+} from "gatsby-plugin-image"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import PortfolioModal from "../components/Portfolio/PortfolioModal"
+import Tags from "../components/Tags"
 
 type Props = {
   data: Queries.PortfolioListQuery
@@ -42,20 +48,6 @@ const ProjectDescription = styled.p`
   margin: 0;
 `
 
-const ChipContainer = styled.div`
-  display: flex;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
-`
-
-const Chip = styled.span`
-  font-size: 0.9rem;
-  background-color: #fafafa;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.4rem;
-`
-
 const Portfolio = ({ data, location }: Props) => {
   var items = data.allFile.nodes.filter(it => it.childMdx)
 
@@ -78,7 +70,11 @@ const Portfolio = ({ data, location }: Props) => {
               <span>{mdx.frontmatter?.date}</span>
               <ProjectTitle>{mdx.frontmatter?.title}</ProjectTitle>
               <GatsbyImage
-                image={getImage(mdx.frontmatter?.thumbnail)}
+                image={
+                  getImage(
+                    mdx.frontmatter?.thumbnail as ImageDataLike
+                  ) as IGatsbyImageData
+                }
                 alt="a"
                 style={{
                   backgroundSize: "cover",
@@ -87,11 +83,7 @@ const Portfolio = ({ data, location }: Props) => {
                   margin: "1.5rem -1.75rem",
                 }}
               />
-              <ChipContainer>
-                {mdx.frontmatter?.tags?.map(it => {
-                  return <Chip key={it}>{it}</Chip>
-                })}
-              </ChipContainer>
+              <Tags tags={mdx.frontmatter?.tags} />
               <ProjectDescription>
                 {mdx.frontmatter?.description}
               </ProjectDescription>
@@ -103,7 +95,7 @@ const Portfolio = ({ data, location }: Props) => {
               <PortfolioModal
                 isVisible={isModalVisible}
                 setVisible={setModalVisible}
-                slug={mdx.fields?.slug}
+                slug={mdx.fields?.slug as string}
               />
             </Card>
           )

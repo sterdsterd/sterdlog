@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
+import Tags from "../Tags"
 
 type Props = {
   data: Queries.PortfolioQuery
@@ -28,14 +29,20 @@ const ArticleInfo = styled.div`
 const PortfolioContent = (props: Props) => {
   return (
     <>
-      <header style={{ display: "flex", flexDirection: "column" }}>
+      <header
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Title>{props.data.mdx?.frontmatter?.title}</Title>
+        <Tags tags={props.data.mdx?.frontmatter?.tags} />
         <ArticleInfo>{props.data.mdx?.frontmatter?.date}</ArticleInfo>
       </header>
       <div
         style={{
           wordBreak: "break-all",
-
           padding: "0 2rem",
         }}
       >
