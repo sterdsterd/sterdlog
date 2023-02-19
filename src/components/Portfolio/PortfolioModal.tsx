@@ -25,19 +25,28 @@ const Modal = styled.div.attrs((props: { isVisible: boolean }) => props)`
 
 const ModalContents = styled.section`
   max-height: 100vh;
-  width: 728px;
+  max-width: 768px;
+  width: 100%;
+  padding: 1rem;
+  padding-top: 0;
   margin: 0 auto;
   border-radius: 1rem;
   background-color: #fff;
   transition: all 0.2s;
-  overflow: hidden;
+  overflow: scroll;
+  overflow-x: hidden;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   animation: modal-show 0.2s;
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 `
 
 const ModalBody = styled.iframe`
   width: 100%;
   border: none;
+  transition: all 0.2s;
 `
 
 const PortfolioModal = (props: Props) => {
@@ -65,13 +74,26 @@ const PortfolioModal = (props: Props) => {
     <Modal isVisible={props.isVisible}>
       {props.isVisible ? (
         <ModalContents>
-          <header style={{ display: "flex", flexDirection: "column" }}>
+          <header
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              top: "0",
+              height: "5rem",
+              right: "0",
+              position: "sticky",
+              backdropFilter: "blur(20px)",
+              backgroundColor: "#fff",
+              mask: "linear-gradient(black 30%, transparent)",
+            }}
+          >
             <IconButton
               onClick={() => props.setVisible(false)}
               style={{
                 marginLeft: "auto",
-                marginRight: "1rem",
-                marginTop: "1rem",
+                marginRight: "0.5rem",
+                marginTop: "1.5rem",
+                zIndex: "100000",
               }}
             >
               <svg
@@ -87,7 +109,11 @@ const PortfolioModal = (props: Props) => {
           <ModalBody
             id="modalBody"
             src={`.${props.slug}`}
-            style={{ height: `calc(2rem + ${frameHeight})` }}
+            style={{
+              height: `calc(2rem + ${frameHeight})`,
+              overflow: "hidden",
+            }}
+            scrolling="no"
           ></ModalBody>
         </ModalContents>
       ) : null}

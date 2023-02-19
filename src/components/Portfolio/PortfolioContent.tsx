@@ -42,7 +42,6 @@ const PortfolioContent = (props: Props) => {
       </header>
       <div
         style={{
-          wordBreak: "break-all",
           padding: "0 2rem",
         }}
       >
