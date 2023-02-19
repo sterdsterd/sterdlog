@@ -152,11 +152,12 @@ module.exports = {
         // Add any options here
       },
     },
-    `gatsby-plugin-netlify`,
     {
-      resolve: `gatsby-plugin-netlify-headers`,
+      resolve: "gatsby-plugin-netlify",
       options: {
-        "/*": ["X-Frame-Options: sameorigin"],
+        headers: {
+          "/*": ["X-Frame-Options: SAMEORIGIN"],
+        },
       },
     },
   ],
