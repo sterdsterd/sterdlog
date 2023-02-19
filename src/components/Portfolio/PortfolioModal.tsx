@@ -1,10 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
-import fs from "node:fs/promises"
-import { compile } from "@mdx-js/mdx"
 import styled from "styled-components"
-import { IconButton } from "./NavigationBar/style"
-import { graphql } from "gatsby"
-import { MDXProvider } from "@mdx-js/react"
+import { IconButton } from "../NavigationBar/style"
 
 type Props = {
   isVisible: boolean

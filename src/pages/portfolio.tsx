@@ -4,7 +4,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import PortfolioModal from "../components/PortfolioModal"
+import PortfolioModal from "../components/Portfolio/PortfolioModal"
 
 type Props = {
   data: Queries.PortfolioListQuery
