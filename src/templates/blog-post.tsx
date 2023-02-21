@@ -1,8 +1,7 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
-
-import Bio from "../components/bio"
+import Giscus from "@giscus/react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import {
@@ -38,7 +37,22 @@ const BlogPostTemplate = ({
           </header>
           <section itemProp="articleBody">{children}</section>
           <hr />
-          <footer>{/* <Bio /> */}</footer>
+          <footer>
+            <Giscus
+              id="comments"
+              repo="sterdsterd/sterdlog-comments"
+              repoId="R_kgDOJAqVVw"
+              category="Comments"
+              categoryId="DIC_kwDOJAqVV84CUWzM"
+              mapping="pathname"
+              reactionsEnabled="1"
+              emitMetadata="0"
+              inputPosition="top"
+              theme="preferred_color_scheme"
+              lang="ko"
+              loading="lazy"
+            />
+          </footer>
         </Post>
       </MDXProvider>
       <Nav>
