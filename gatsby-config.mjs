@@ -1,13 +1,11 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
- */
+import { fileURLToPath } from "url"
+import { dirname } from "path"
+import remarkGfm from "remark-gfm"
 
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
-module.exports = {
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const config = {
   siteMetadata: {
     title: `sterdlog`,
     author: {
@@ -73,6 +71,9 @@ module.exports = {
           `gatsby-remark-autolink-headers`,
           `gatsby-remark-prismjs`,
         ],
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+        },
       },
     },
     `gatsby-transformer-sharp`,
@@ -163,3 +164,5 @@ module.exports = {
   ],
   graphqlTypegen: true,
 }
+
+export default config
