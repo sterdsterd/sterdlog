@@ -57,6 +57,12 @@ const config = {
         extensions: [`.md`, `.mdx`],
         gatsbyRemarkPlugins: [
           {
+            resolve: `gatsby-remark-katex`,
+            options: {
+              strict: `ignore`,
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 630,
