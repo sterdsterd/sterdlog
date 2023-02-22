@@ -1,6 +1,17 @@
 import styled from "styled-components"
 
-const Post = styled.article``
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+`
+
+const Post = styled.section`
+  max-width: 728px;
+  @media screen and (min-width: 88rem) {
+    min-width: 728px;
+  }
+`
 
 const Title = styled.h1`
   font-size: 48px;
@@ -46,4 +57,13 @@ const NavItemTitle = styled.div`
   font-weight: 700;
 `
 
-export { Post, Title, ArticleInfo, Nav, NavItem, NavItemSubtitle, NavItemTitle }
+export {
+  PostContainer,
+  Post,
+  Title,
+  ArticleInfo,
+  Nav,
+  NavItem,
+  NavItemSubtitle,
+  NavItemTitle,
+}

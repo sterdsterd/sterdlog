@@ -1,10 +1,12 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
+import TableOfContents from "../components/TableOfContents"
 import Giscus from "@giscus/react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import {
+  PostContainer,
   Post,
   Title,
   ArticleInfo,
@@ -30,12 +32,19 @@ const BlogPostTemplate = ({
   return (
     <Layout isBlog={true}>
       <MDXProvider>
-        <Post itemScope itemType="http://schema.org/Article">
+        <article itemScope itemType="http://schema.org/Article">
           <header>
             <Title itemProp="headline">{post?.frontmatter?.title}</Title>
             <ArticleInfo>{post?.frontmatter?.date}</ArticleInfo>
           </header>
-          <section itemProp="articleBody">{children}</section>
+          <PostContainer>
+            <>
+              <Post itemProp="articleBody">{children}</Post>
+              {post?.tableOfContents?.items && (
+                <TableOfContents items={post?.tableOfContents.items} />
+              )}
+            </>
+          </PostContainer>
           <hr />
           <footer>
             <Giscus
@@ -53,28 +62,28 @@ const BlogPostTemplate = ({
               loading="lazy"
             />
           </footer>
-        </Post>
+          <Nav>
+            {previous ? (
+              <Link to={previous.fields?.slug!} rel="prev">
+                <NavItem>
+                  <NavItemSubtitle>이전 글</NavItemSubtitle>
+                  <NavItemTitle>← {previous.frontmatter?.title}</NavItemTitle>
+                </NavItem>
+              </Link>
+            ) : (
+              <div></div>
+            )}
+            {next && (
+              <Link to={next.fields?.slug!} rel="next">
+                <NavItem style={{ textAlign: "right" }}>
+                  <NavItemSubtitle>다음 글</NavItemSubtitle>
+                  <NavItemTitle>{next.frontmatter?.title} →</NavItemTitle>
+                </NavItem>
+              </Link>
+            )}
+          </Nav>
+        </article>
       </MDXProvider>
-      <Nav>
-        {previous ? (
-          <Link to={previous.fields?.slug!} rel="prev">
-            <NavItem>
-              <NavItemSubtitle>이전 글</NavItemSubtitle>
-              <NavItemTitle>← {previous.frontmatter?.title}</NavItemTitle>
-            </NavItem>
-          </Link>
-        ) : (
-          <div></div>
-        )}
-        {next && (
-          <Link to={next.fields?.slug!} rel="next">
-            <NavItem style={{ textAlign: "right" }}>
-              <NavItemSubtitle>다음 글</NavItemSubtitle>
-              <NavItemTitle>{next.frontmatter?.title} →</NavItemTitle>
-            </NavItem>
-          </Link>
-        )}
-      </Nav>
     </Layout>
   )
 }
@@ -108,6 +117,7 @@ export const pageQuery = graphql`
     mdx(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
+      tableOfContents
       frontmatter {
         title
         date(formatString: "YYYY년 M월 D일")
