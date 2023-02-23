@@ -16,7 +16,7 @@ export const TagContainer = styled.div`
 `
 
 type Props = {
-  tags: Array<string>
+  tags: readonly (string | null)[]
 }
 
 const Tags = (props: Props) => {
