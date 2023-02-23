@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import useActiveID from "../hooks/useActiveID"
 
 interface Items {
   url: string
@@ -35,13 +36,13 @@ const ListItem = styled.li`
   margin-bottom: 0;
 `
 
-const ListItemLink = styled.a`
+const ListItemLink = styled.a.attrs((props: { isActive: boolean }) => props)`
   display: block;
   width: 100%;
   padding: 0.8rem;
   transition: all 0.2s;
   border-radius: 0.5rem;
-  color: #000;
+  color: ${props => (props.isActive ? "#2563e1" : "#000000")};
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
     color: #2563e1;
@@ -60,34 +61,6 @@ function getIdList(items: Array<Items>) {
   }, [])
 }
 
-function useActiveId(itemIds: Array<string>) {
-  const [activeId, setActiveId] = useState<string>(`test`)
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
-        })
-      },
-      { rootMargin: `0% 0% -90% 0%` }
-    )
-    itemIds.forEach(id => {
-      if (document.getElementById(id))
-        observer.observe(document.getElementById(id)!)
-    })
-
-    return () => {
-      itemIds.forEach(id => {
-        if (document.getElementById(id))
-          observer.unobserve(document.getElementById(id)!)
-      })
-    }
-  }, [itemIds])
-  return activeId
-}
-
 const renderItems = (items: Array<Items>, activeId: string) => {
   return (
     <List>
@@ -95,9 +68,7 @@ const renderItems = (items: Array<Items>, activeId: string) => {
         <ListItem key={item.url}>
           <ListItemLink
             href={item.url}
-            style={{
-              color: activeId === item.url.slice(1) ? "#2563e1" : "#000",
-            }}
+            isActive={activeId === item.url.slice(1)}
           >
             {item.title}
           </ListItemLink>
@@ -110,12 +81,12 @@ const renderItems = (items: Array<Items>, activeId: string) => {
 
 const TableOfContents = (props: Props) => {
   const idList = getIdList(props.items)
-  const activeId = useActiveId(idList)
+  const activeID = useActiveID(idList)
   return (
     <div>
       <TOCContainer>
         <span style={{ marginLeft: "1.2rem" }}>목차</span>
-        {renderItems(props.items, activeId)}
+        {renderItems(props.items, activeID)}
       </TOCContainer>
     </div>
   )
