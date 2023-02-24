@@ -8,12 +8,14 @@
 /*********************************************************
 * General
 */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 pre[class*="language-"],
 code[class*="language-"] {
   color: #bbbbbb;
-  font-size: 13px;
+  font-size: 1rem;
   text-shadow: none;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-family: "JetBrains Mono", monospace;
   direction: ltr;
   text-align: left;
   white-space: pre;
@@ -46,12 +48,13 @@ pre[class*="language-"] {
   margin: 0.5em 0;
   overflow: auto;
   background: #282c34;
+  border-radius: 1rem;
 }
 :not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
-  color: #db4c69;
-  background: #f9f2f4;
+  color: #2563e1;
+  background: #f1f3f9;
 }
 /*********************************************************
 * Tokens
