@@ -11,6 +11,11 @@ const Post = styled.section`
   @media screen and (min-width: 88rem) {
     min-width: 728px;
   }
+
+  @media screen and (max-width: 728px) {
+    min-width: unset;
+    width: 100%;
+  }
 `
 
 const Title = styled.h1`
