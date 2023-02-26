@@ -17,6 +17,27 @@ const scaleAnimation = keyframes`
   }
 `
 
+const arrowAnimation = keyframes`
+  0% {
+    transform: translateY(0);
+    opacity: 0%;
+  }
+  70% {
+    transform: translateY(1.5rem);
+    opacity: 100%;
+  }
+  100% {
+    transform: translateY(1.5rem);
+    opacity: 0%;
+  }
+`
+
+const IconContainer = styled.div`
+  position: absolute;
+  bottom: 10%;
+  animation: ${arrowAnimation} 2s cubic-bezier(0.16, 1, 0.3, 1) infinite 1s;
+`
+
 const MainContainer = styled.div`
   height: 100vh;
   margin-top: -60px;
@@ -102,33 +123,48 @@ const Blog = () => {
             }}
           />
         </LogoContainer>
+        <IconContainer>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="48"
+            viewBox="0 96 960 960"
+            width="48"
+          >
+            <path d="M480 724.001 226.434 470.435 283 413.869l197 198 197-197 56.566 56.566L480 724.001Z" />
+          </svg>
+        </IconContainer>
       </MainContainer>
       <div className="global-wrapper" style={{ height: "calc(100vh - 60px)" }}>
-        <div style={{ paddingLeft: "1rem" }}>
-          <h1 style={{ marginBottom: "0.5rem" }}>
-            안녕하세요,
+        <div style={{ padding: "1rem" }}>
+          <p style={{ marginBottom: "0" }}>안녕하세요, 반갑습니다!</p>
+          <h1
+            style={{
+              marginTop: "0.5rem",
+              marginBottom: "0.5rem",
+              fontWeight: "600",
+            }}
+          >
+            🌏세상을 움직이는 개발자
             <br />
-            이율원입니다
+            <b>이율원</b>입니다
           </h1>
-          <p>프론트엔드 / 안드로이드 개발자</p>
           <h2>학력</h2>
           <p>건국대학교 컴퓨터공학부 22학번, 2022년 03월 - 현재</p>
           <h2>수상 경력</h2>
           <p>
             2019년 삼성 주니어 소프트웨어 창작대회 고등부 최우수상 수상, 2019년
             11월
-          </p>
-          <p>
+            <br />
             2017년 앤어워드 디지털 창의 학생 공모전 우수상 수상, 2018년 01월
           </p>
           <h2>프로젝트</h2>
-          <h4>암호화폐 모의 투자 안드로이드 어플리케이션 개발, 2017년 11월</h4>
+          <h4>통학 차량 탑승 학생 자동 출석 체크 솔루션 개발, 2019년 07월</h4>
           <p>
-            기존의 MTS와 비슷한 사용자 경험으로 암호화폐 모의 투자를 할 수 있는
-            안드로이드 어플리케이션을 기획하고, Java를 사용한 어플리케이션의 UI
-            개발에 참여했습니다. Backend는 Firebase를 사용하여 구현했습니다.
-            2017 앤어워드 디지털 창의 학생 공모전에 제출하여 우수상을
-            수상했습니다.
+            BLE 비콘을 사용하여 통학 차량에 학생이 탑승했는지 자동으로 체크하고,
+            교실에 입실한 학생과 대조하여 출석을 자동으로 체크할 수 있는
+            안드로이드 어플리케이션을 기획하고, Kotlin을 사용하여 개발했습니다.
+            Backend는 Firebase를 사용하여 구현했습니다. 2019 삼성 주니어
+            소프트웨어 창작대회에 제출하여 최우수상을 수상했습니다.
           </p>
           <h4>웹 기반 키오스크 솔루션 개발, 2019년 05월</h4>
           <p>
@@ -137,13 +173,13 @@ const Blog = () => {
             있는 안드로이드 어플리케이션은 Kotlin을 사용하여 개발했습니다.
             Backend는 Firebase를 사용하여 구현했습니다.
           </p>
-          <h4>통학 차량 탑승 학생 자동 출석 체크 솔루션 개발, 2019년 07월</h4>
+          <h4>암호화폐 모의 투자 안드로이드 어플리케이션 개발, 2017년 11월</h4>
           <p>
-            BLE 비콘을 사용하여 통학 차량에 학생이 탑승했는지 자동으로 체크하고,
-            교실에 입실한 학생과 대조하여 출석을 자동으로 체크할 수 있는
-            안드로이드 어플리케이션을 기획하고, Kotlin을 사용하여 개발했습니다.
-            Backend는 Firebase를 사용하여 구현했습니다. 2019 삼성 주니어
-            소프트웨어 창작대회에 제출하여 최우수상을 수상했습니다.
+            기존의 MTS와 비슷한 사용자 경험으로 암호화폐 모의 투자를 할 수 있는
+            안드로이드 어플리케이션을 기획하고, Java를 사용한 어플리케이션의 UI
+            개발에 참여했습니다. Backend는 Firebase를 사용하여 구현했습니다.
+            2017 앤어워드 디지털 창의 학생 공모전에 제출하여 우수상을
+            수상했습니다.
           </p>
         </div>
       </div>
