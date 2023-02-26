@@ -12,7 +12,7 @@ const Post = styled.section`
     min-width: 728px;
   }
 
-  @media screen and (max-width: 728px) {
+  @media screen and (max-width: 768px) {
     min-width: unset;
     width: 100%;
   }
