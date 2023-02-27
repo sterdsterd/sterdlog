@@ -11,8 +11,14 @@ export const Tag = styled.span`
 
 export const TagContainer = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
   gap: 0.8rem;
-  margin-bottom: 1rem;
+  overflow-x: scroll;
+  ::-webkit-scrollbar {
+    height: 0;
+  }
 `
 
 type Props = {

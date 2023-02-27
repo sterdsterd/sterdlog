@@ -25,13 +25,18 @@ const Card = styled.div`
   flex-direction: column;
 `
 
+const ProjectDate = styled.span`
+  color: #777;
+`
+
 const ProjectTitle = styled.h2`
   margin-top: 0.3rem;
-  margin-bottom: 0;
+  margin-bottom: 0.3rem;
 `
 
 const ProjectDescription = styled.p`
   margin: 0;
+  margin-bottom: 1rem;
 `
 
 const Button = styled.button`
@@ -40,10 +45,11 @@ const Button = styled.button`
   background-color: transparent;
   transition: all 0.2s;
   padding: 0.8rem 0.9rem;
-  margin-right: -0.625rem;
-  margin-bottom: -0.5rem;
+  margin-left: 1rem;
+  margin-right: -0.25rem;
   font-weight: 700;
   color: #2563e1;
+  flex-shrink: 0;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
@@ -68,8 +74,9 @@ const PortfolioListItem = (props: Props) => {
 
   return (
     <Card key={props.slug}>
-      <span>{props.date}</span>
+      <ProjectDate>{props.date}</ProjectDate>
       <ProjectTitle>{props.title}</ProjectTitle>
+      <ProjectDescription>{props.description}</ProjectDescription>
       <GatsbyImage
         image={getImage(props.thumbnail as ImageDataLike) as IGatsbyImageData}
         alt={`${props.title} 프리뷰 이미지`}
@@ -78,11 +85,20 @@ const PortfolioListItem = (props: Props) => {
           width: "calc(100% + 3.5rem)",
           height: "100%",
           margin: "1.5rem -1.75rem",
+          marginTop: "0",
         }}
       />
-      <Tags tags={props.tags} />
-      <ProjectDescription>{props.description}</ProjectDescription>
-      <div style={{ marginLeft: "auto", marginRight: "0" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          alignContent: "center",
+          margin: "-0.5rem -0.375rem",
+        }}
+      >
+        <Tags tags={props.tags} />
         <Button onClick={() => setModalVisible(true)}>자세히 보기 →</Button>
       </div>
       <PortfolioModal

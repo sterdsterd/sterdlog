@@ -55,6 +55,10 @@ const MainContainer = styled.div`
   background-attachment: scroll;
 `
 
+const DateText = styled.span`
+  color: #777;
+`
+
 const LogoContainer = styled.div`
   position: relative;
   width: 10rem;
@@ -134,7 +138,7 @@ const Blog = () => {
           </svg>
         </IconContainer>
       </MainContainer>
-      <div className="global-wrapper" style={{ height: "calc(100vh - 60px)" }}>
+      <div className="global-wrapper">
         <div style={{ padding: "1rem" }}>
           <p style={{ marginBottom: "0" }}>안녕하세요, 반갑습니다!</p>
           <h1
@@ -149,16 +153,23 @@ const Blog = () => {
             <b>이율원</b>입니다
           </h1>
           <h2>학력</h2>
-          <p>건국대학교 컴퓨터공학부 22학번, 2022년 03월 - 현재</p>
+          <p>
+            건국대학교 컴퓨터공학부 22학번
+            <DateText>, 2022년 03월 - 현재</DateText>
+          </p>
           <h2>수상 경력</h2>
           <p>
-            2019년 삼성 주니어 소프트웨어 창작대회 고등부 최우수상 수상, 2019년
-            11월
+            2019년 삼성 주니어 소프트웨어 창작대회 고등부 최우수상 수상
+            <DateText>, 2019년 11월</DateText>
             <br />
-            2017년 앤어워드 디지털 창의 학생 공모전 우수상 수상, 2018년 01월
+            2017년 앤어워드 디지털 창의 학생 공모전 우수상 수상
+            <DateText>, 2018년 1월</DateText>
           </p>
           <h2>프로젝트</h2>
-          <h4>통학 차량 탑승 학생 자동 출석 체크 솔루션 개발, 2019년 07월</h4>
+          <h4>
+            통학 차량 탑승 학생 자동 출석 체크 솔루션 개발
+            <DateText>, 2019년 7월</DateText>
+          </h4>
           <p>
             BLE 비콘을 사용하여 통학 차량에 학생이 탑승했는지 자동으로 체크하고,
             교실에 입실한 학생과 대조하여 출석을 자동으로 체크할 수 있는
@@ -166,14 +177,19 @@ const Blog = () => {
             Backend는 Firebase를 사용하여 구현했습니다. 2019 삼성 주니어
             소프트웨어 창작대회에 제출하여 최우수상을 수상했습니다.
           </p>
-          <h4>웹 기반 키오스크 솔루션 개발, 2019년 05월</h4>
+          <h4>
+            웹 기반 키오스크 솔루션 개발<DateText>, 2019년 5월</DateText>
+          </h4>
           <p>
             웹 환경에서 사용할 수 있는 키오스크 웹 앱을 HTML, CSS, Javascript,
             JQuery를 사용하여 개발했습니다. 주문 통계 및 주문 내역을 확인할 수
             있는 안드로이드 어플리케이션은 Kotlin을 사용하여 개발했습니다.
             Backend는 Firebase를 사용하여 구현했습니다.
           </p>
-          <h4>암호화폐 모의 투자 안드로이드 어플리케이션 개발, 2017년 11월</h4>
+          <h4>
+            암호화폐 모의 투자 안드로이드 어플리케이션 개발
+            <DateText>, 2017년 11월</DateText>
+          </h4>
           <p>
             기존의 MTS와 비슷한 사용자 경험으로 암호화폐 모의 투자를 할 수 있는
             안드로이드 어플리케이션을 기획하고, Java를 사용한 어플리케이션의 UI
