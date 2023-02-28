@@ -5,21 +5,23 @@ import useActiveID from "../hooks/useActiveID"
 interface Items {
   url: string
   title: string
-  items?: Array<Items>
+  items?: Items[]
 }
 
 type Props = {
-  items: Array<Items>
+  items: Items[]
 }
 
 const TOCContainer = styled.div`
   position: sticky;
   width: 20rem;
   top: calc(60px + 2rem);
-  margin-left: 0.8rem;
+  margin-left: 2.8rem;
   font-weight: 700;
+  max-height: calc(100vh - 60px - 4rem);
+  overflow-y: scroll;
 
-  @media screen and (max-width: 88rem) {
+  @media screen and (max-width: 92rem) {
     display: none;
   }
 `
@@ -84,7 +86,7 @@ const TableOfContents = (props: Props) => {
   const activeID = useActiveID(idList)
   return (
     <div>
-      <TOCContainer>
+      <TOCContainer className="scrollbar">
         <span style={{ marginLeft: "1.2rem" }}>목차</span>
         {renderItems(props.items, activeID)}
       </TOCContainer>

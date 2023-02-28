@@ -177,6 +177,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       emoji: String
       tags: [String]
       thumbnail: File
+      featuredVideo: String
     }
 
     type Fields {

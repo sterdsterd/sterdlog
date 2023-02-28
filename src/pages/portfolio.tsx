@@ -39,6 +39,7 @@ const Portfolio = ({ data, location }: Props) => {
               thumbnail={mdx.frontmatter?.thumbnail!}
               tags={mdx.frontmatter?.tags!}
               description={mdx.frontmatter?.description!}
+              featuredVideo={mdx.frontmatter?.featuredVideo!}
             />
           )
         })}
@@ -79,6 +80,7 @@ export const pageQuery = graphql`
                 )
               }
             }
+            featuredVideo
           }
         }
       }

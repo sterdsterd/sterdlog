@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components"
 import Header from "../components/NavigationBar/header"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Footer from "../components/footer"
 
 type Props = {}
 
@@ -198,6 +199,7 @@ const Blog = () => {
             수상했습니다.
           </p>
         </div>
+        <Footer />
       </div>
     </>
   )

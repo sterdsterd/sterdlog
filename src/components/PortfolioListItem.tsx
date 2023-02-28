@@ -60,13 +60,14 @@ type Props = {
   slug: string
   title: string
   date: string
-  thumbnail: {
+  thumbnail?: {
     readonly childImageSharp: {
       readonly gatsbyImageData: IGatsbyImageData
     } | null
   }
   tags: readonly (string | null)[]
   description: string
+  featuredVideo?: string
 }
 
 const PortfolioListItem = (props: Props) => {
@@ -77,17 +78,37 @@ const PortfolioListItem = (props: Props) => {
       <ProjectDate>{props.date}</ProjectDate>
       <ProjectTitle>{props.title}</ProjectTitle>
       <ProjectDescription>{props.description}</ProjectDescription>
-      <GatsbyImage
-        image={getImage(props.thumbnail as ImageDataLike) as IGatsbyImageData}
-        alt={`${props.title} 프리뷰 이미지`}
-        style={{
-          backgroundSize: "cover",
-          width: "calc(100% + 3.5rem)",
-          height: "100%",
-          margin: "1.5rem -1.75rem",
-          marginTop: "0",
-        }}
-      />
+
+      {props.thumbnail && (
+        <GatsbyImage
+          image={getImage(props.thumbnail as ImageDataLike) as IGatsbyImageData}
+          alt={`${props.title} 프리뷰 이미지`}
+          style={{
+            backgroundSize: "cover",
+            width: "calc(100% + 3.5rem)",
+            height: "100%",
+            margin: "1.5rem -1.75rem",
+            marginTop: "0",
+          }}
+        />
+      )}
+
+      {props.featuredVideo && (
+        <iframe
+          src={props.featuredVideo}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          style={{
+            width: "calc(100% + 3.5rem)",
+            aspectRatio: "16 / 9",
+            margin: "1.5rem -1.75rem",
+            marginTop: "0",
+            border: "0",
+          }}
+        ></iframe>
+      )}
       <div
         style={{
           display: "flex",

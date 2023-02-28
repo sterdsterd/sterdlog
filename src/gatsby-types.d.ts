@@ -744,6 +744,7 @@ type Frontmatter = {
   readonly date: Maybe<Scalars['Date']>;
   readonly description: Maybe<Scalars['String']>;
   readonly emoji: Maybe<Scalars['String']>;
+  readonly featuredVideo: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly thumbnail: Maybe<File>;
   readonly title: Maybe<Scalars['String']>;
@@ -761,6 +762,7 @@ type FrontmatterFieldSelector = {
   readonly date: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly emoji: InputMaybe<FieldSelectorEnum>;
+  readonly featuredVideo: InputMaybe<FieldSelectorEnum>;
   readonly tags: InputMaybe<FieldSelectorEnum>;
   readonly thumbnail: InputMaybe<FileFieldSelector>;
   readonly title: InputMaybe<FieldSelectorEnum>;
@@ -770,6 +772,7 @@ type FrontmatterFilterInput = {
   readonly date: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly emoji: InputMaybe<StringQueryOperatorInput>;
+  readonly featuredVideo: InputMaybe<StringQueryOperatorInput>;
   readonly tags: InputMaybe<StringQueryOperatorInput>;
   readonly thumbnail: InputMaybe<FileFilterInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
@@ -779,6 +782,7 @@ type FrontmatterSortInput = {
   readonly date: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly emoji: InputMaybe<SortOrderEnum>;
+  readonly featuredVideo: InputMaybe<SortOrderEnum>;
   readonly tags: InputMaybe<SortOrderEnum>;
   readonly thumbnail: InputMaybe<FileSortInput>;
   readonly title: InputMaybe<SortOrderEnum>;
@@ -1562,6 +1566,7 @@ type MdxFrontmatter = {
   readonly date: Maybe<Scalars['Date']>;
   readonly description: Maybe<Scalars['String']>;
   readonly emoji: Maybe<Scalars['String']>;
+  readonly featuredVideo: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly thumbnail: Maybe<File>;
   readonly title: Maybe<Scalars['String']>;
@@ -1579,6 +1584,7 @@ type MdxFrontmatterFieldSelector = {
   readonly date: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly emoji: InputMaybe<FieldSelectorEnum>;
+  readonly featuredVideo: InputMaybe<FieldSelectorEnum>;
   readonly tags: InputMaybe<FieldSelectorEnum>;
   readonly thumbnail: InputMaybe<FileFieldSelector>;
   readonly title: InputMaybe<FieldSelectorEnum>;
@@ -1588,6 +1594,7 @@ type MdxFrontmatterFilterInput = {
   readonly date: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly emoji: InputMaybe<StringQueryOperatorInput>;
+  readonly featuredVideo: InputMaybe<StringQueryOperatorInput>;
   readonly tags: InputMaybe<StringQueryOperatorInput>;
   readonly thumbnail: InputMaybe<FileFilterInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
@@ -1597,6 +1604,7 @@ type MdxFrontmatterSortInput = {
   readonly date: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly emoji: InputMaybe<SortOrderEnum>;
+  readonly featuredVideo: InputMaybe<SortOrderEnum>;
   readonly tags: InputMaybe<SortOrderEnum>;
   readonly thumbnail: InputMaybe<FileSortInput>;
   readonly title: InputMaybe<SortOrderEnum>;
@@ -3275,7 +3283,7 @@ type PortfolioQuery = { readonly mdx: { readonly id: string, readonly excerpt: s
 type PortfolioListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PortfolioListQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly childMdx: { readonly excerpt: string | null, readonly body: string | null, readonly internal: { readonly contentFilePath: string | null }, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly description: string | null, readonly thumbnail: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } | null }> } };
+type PortfolioListQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly childMdx: { readonly excerpt: string | null, readonly body: string | null, readonly internal: { readonly contentFilePath: string | null }, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly description: string | null, readonly featuredVideo: string | null, readonly thumbnail: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } | null }> } };
 
 type PostListPageQueryVariables = Exact<{ [key: string]: never; }>;
 

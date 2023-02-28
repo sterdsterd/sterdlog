@@ -37,10 +37,6 @@ const ModalContents = styled.section`
   overflow-x: hidden;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   animation: modal-show 0.2s;
-
-  ::-webkit-scrollbar {
-    width: 0;
-  }
 `
 
 const ModalBody = styled.iframe`
@@ -73,7 +69,7 @@ const PortfolioModal = (props: Props) => {
   return (
     <Modal isVisible={props.isVisible}>
       {props.isVisible ? (
-        <ModalContents>
+        <ModalContents className="scrollbar">
           <header
             style={{
               display: "flex",
