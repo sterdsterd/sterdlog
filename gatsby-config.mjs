@@ -1,9 +1,21 @@
+import "dotenv/config"
 import { fileURLToPath } from "url"
 import { dirname } from "path"
 import remarkGfm from "remark-gfm"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
+
+const pageToAlgoliaRecord = ({
+  node: { id, frontmatter, fields, ...rest },
+}) => {
+  return {
+    objectID: id,
+    ...frontmatter,
+    ...fields,
+    ...rest,
+  }
+}
 
 const config = {
   siteMetadata: {
@@ -165,6 +177,37 @@ const config = {
         headers: {
           "/*": ["X-Frame-Options: SAMEORIGIN"],
         },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        queries: [
+          {
+            query: `{
+              pages: allMdx {
+                edges {
+                  node {
+                    id
+                    frontmatter {
+                      title
+                    }
+                    fields {
+                      slug
+                    }
+                    excerpt(pruneLength: 5000)
+                  }
+                }
+              }
+            }`,
+            transformer: ({ data }) =>
+              data.pages.edges.map(pageToAlgoliaRecord),
+            indexName: `Pages`,
+            settings: { attributesToSnippet: [`excerpt:20`] },
+          },
+        ],
       },
     },
   ],
