@@ -3,6 +3,9 @@ import { Link } from "gatsby"
 import { MenuType } from "./header"
 import { DesktopNav, Logo, DesktopMenu, DesktopMenuItem } from "./style"
 import SterdLogoSVG from "../logoSVG"
+import Search from "../Search"
+
+const searchIndices = [{ name: "Pages", title: "Pages" }]
 
 type Props = { menus: Array<MenuType>; isBlog: boolean }
 
@@ -26,6 +29,7 @@ const DesktopNavigationBar = (props: Props) => {
             </Link>
           )
         })}
+        <Search indices={searchIndices} />
       </DesktopMenu>
     </DesktopNav>
   )
