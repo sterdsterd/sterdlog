@@ -1,6 +1,13 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  createRef,
+} from "react"
 import styled from "styled-components"
 import { IconButton } from "../NavigationBar/style"
+import useClickOutside from "../../hooks/useClickOutside"
 
 type Props = {
   isVisible: boolean
@@ -47,6 +54,8 @@ const ModalBody = styled.iframe`
 
 const PortfolioModal = (props: Props) => {
   const [frameHeight, setFrameHeight] = useState<string>()
+  const modalRef = createRef()
+
   useEffect(() => {
     const t = setInterval(() => {
       const frame: HTMLIFrameElement = document.getElementById(
@@ -66,10 +75,12 @@ const PortfolioModal = (props: Props) => {
     }
   }, [props.isVisible])
 
+  useClickOutside(modalRef, () => props.setVisible(false))
+
   return (
     <Modal isVisible={props.isVisible}>
       {props.isVisible ? (
-        <ModalContents className="scrollbar">
+        <ModalContents className="scrollbar" ref={modalRef}>
           <header
             style={{
               display: "flex",
