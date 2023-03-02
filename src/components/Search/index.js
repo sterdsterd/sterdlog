@@ -2,7 +2,7 @@ import algoliasearch from "algoliasearch/lite"
 import { createRef, default as React, useState, useMemo } from "react"
 import { InstantSearch } from "react-instantsearch-dom"
 import { ThemeProvider } from "styled-components"
-import StyledSearchBox from "./styled-search-box"
+import SearchBox from "../Search/SearchBox"
 import StyledSearchResult from "./styled-search-result"
 import StyledSearchRoot from "./styled-search-root"
 import useClickOutside from "../../hooks/useClickOutside"
@@ -16,7 +16,7 @@ const theme = {
 export default function Search({ indices }) {
   const rootRef = createRef()
   const [query, setQuery] = useState()
-  const [hasFocus, setFocus] = useState(false)
+  const [isFocused, setFocused] = useState(false)
   const searchClient = useMemo(
     () =>
       algoliasearch(
@@ -26,7 +26,7 @@ export default function Search({ indices }) {
     []
   )
 
-  useClickOutside(rootRef, () => setFocus(false))
+  useClickOutside(rootRef, () => setFocused(false))
 
   return (
     <ThemeProvider theme={theme}>
@@ -36,9 +36,9 @@ export default function Search({ indices }) {
           indexName={indices[0].name}
           onSearchStateChange={({ query }) => setQuery(query)}
         >
-          <StyledSearchBox onFocus={() => setFocus(true)} hasFocus={hasFocus} />
+          <SearchBox onFocus={() => setFocused(true)} isFocused={isFocused} />
           <StyledSearchResult
-            show={query && query.length > 0 && hasFocus}
+            show={query && query.length > 0 && isFocused}
             indices={indices}
             className="scrollbar"
           />

@@ -1,0 +1,92 @@
+import React from "react"
+import { connectSearchBox } from "react-instantsearch-dom"
+import styled, { css } from "styled-components"
+import { SearchBoxProvided } from "react-instantsearch-core"
+
+const SearchForm = styled.form<{ isFocused: boolean }>`
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-bottom: 0;
+  border-radius: 10px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: ${props =>
+      props.isFocused ? "transparent" : "rgba(0, 0, 0, 0.05)"};
+  }
+`
+
+const SearchInput = styled.input<{ isFocused: boolean }>`
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 1rem;
+  color: #000;
+
+  ::placeholder {
+    color: #777;
+  }
+
+  ${props =>
+    props.isFocused
+      ? css`
+          width: 13.75rem;
+          background: #fff;
+          cursor: text;
+          margin-left: -2.5rem;
+          padding-left: 2.25rem;
+          border: 1px solid rgba(0, 0, 0, 0.15);
+        `
+      : css`
+          width: 0;
+          background: transparent;
+          cursor: pointer;
+          margin-left: -2.5em;
+          padding-left: 2.5em;
+          border: none;
+        `}
+`
+
+const SearchIcon = styled.div`
+  display: flex;
+  width: 1.5rem;
+  pointer-events: none;
+  margin: 0.5rem;
+`
+
+interface Props extends SearchBoxProvided {
+  onFocus: () => void
+  isFocused: boolean
+}
+
+const SearchBox = connectSearchBox(
+  ({ refine, currentRefinement, onFocus, isFocused }: Props) => (
+    <SearchForm isFocused={isFocused}>
+      <SearchInput
+        type="text"
+        placeholder="Search"
+        aria-label="Search"
+        onChange={e => refine(e.target.value)}
+        value={currentRefinement}
+        onFocus={onFocus}
+        isFocused={isFocused}
+      />
+      <SearchIcon>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24"
+          viewBox="0 96 960 960"
+          width="24"
+          fill="#777"
+        >
+          <path d="M766.652 922.044 529.043 685.001q-29.434 24.26-69.111 37.934-39.676 13.674-85.323 13.674-112.119 0-189.864-77.826Q106.999 580.957 106.999 471t77.827-187.783q77.826-77.826 188.283-77.826 110.456 0 187.782 77.826 77.327 77.826 77.327 187.933 0 43.98-13.152 83.133-13.153 39.152-39.457 73.587l239.609 237.608q11.826 11.833 11.826 28.069 0 16.236-12.739 28.41-12.077 12.478-29.174 12.478t-28.479-12.391ZM373.808 657.391q77.659 0 131.425-54.533Q558.999 548.326 558.999 471q0-77.326-53.849-131.858-53.849-54.533-131.342-54.533-78.326 0-132.958 54.533Q186.218 393.674 186.218 471q0 77.326 54.549 131.858 54.549 54.533 133.041 54.533Z" />
+        </svg>
+      </SearchIcon>
+    </SearchForm>
+  )
+)
+
+export default SearchBox
