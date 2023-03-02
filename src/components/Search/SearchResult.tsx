@@ -9,11 +9,7 @@ import {
   PoweredBy,
 } from "react-instantsearch-dom"
 import styled from "styled-components"
-
-type IndexType = {
-  name: string
-  title: string
-}
+import { IndexType } from "./Search"
 
 type Props = {
   isVisible: boolean
@@ -60,12 +56,17 @@ const StyledHits = styled(Hits)`
     margin-bottom: 1em;
 
     a {
-      color: ${({ theme }) => theme.foreground};
+      color: #000;
 
       h4 {
         margin-top: 0;
         margin-bottom: 0.2em;
       }
+    }
+
+    mark {
+      color: #2563e1;
+      background-color: transparent;
     }
   }
 `
@@ -102,16 +103,24 @@ const SearchResultContainer = styled.div<{ isVisible: boolean }>`
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 1rem;
   border-radius: 1rem;
-  background: ${({ theme }) => theme.background};
+  background: #fff;
   transform: translateX(-16.7rem);
 
   .ais-PoweredBy {
     display: flex;
     justify-content: flex-end;
     font-size: 80%;
+    gap: 0.5rem;
+    align-items: center;
 
-    svg {
-      width: 70px;
+    a {
+      display: flex;
+      svg {
+        width: 70px;
+        path {
+          fill: #2563e1;
+        }
+      }
     }
   }
 `

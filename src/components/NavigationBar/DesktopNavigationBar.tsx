@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import { MenuType } from "./header"
 import { DesktopNav, Logo, DesktopMenu, DesktopMenuItem } from "./style"
 import SterdLogoSVG from "../logoSVG"
-import Search from "../Search"
+import Search from "../Search/Search"
 
 const searchIndices = [{ name: "Pages", title: "Pages" }]
 
