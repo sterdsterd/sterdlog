@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components"
 import StyledSearchBox from "./styled-search-box"
 import StyledSearchResult from "./styled-search-result"
 import StyledSearchRoot from "./styled-search-root"
-import useClickOutside from "./use-click-outside"
+import useClickOutside from "../../hooks/useClickOutside"
 
 const theme = {
   foreground: "#050505",
