@@ -33,6 +33,12 @@ const HitItemContainer = styled.div`
   &:hover {
     background-color: #f1f1f1;
   }
+
+  @media screen and (max-width: 768px) {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
 `
 
 const HitItem = ({ hit }: { hit: any }) => (
@@ -122,5 +128,19 @@ const SearchResultContainer = styled.div<{ isVisible: boolean }>`
         }
       }
     }
+  }
+
+  @media screen and (max-width: 768px) {
+    position: unset;
+    width: calc(100vw - 3rem);
+    transform: none;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+    max-width: unset;
+    margin-top: 1rem;
+    max-height: calc(100vh - 8.5rem);
   }
 `

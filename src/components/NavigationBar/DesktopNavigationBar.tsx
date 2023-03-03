@@ -1,11 +1,9 @@
 import React from "react"
 import { Link } from "gatsby"
-import { MenuType } from "./header"
+import { MenuType, searchIndices } from "./header"
 import { DesktopNav, Logo, DesktopMenu, DesktopMenuItem } from "./style"
 import SterdLogoSVG from "../logoSVG"
 import Search from "../Search/Search"
-
-const searchIndices = [{ name: "Pages", title: "Pages" }]
 
 type Props = { menus: Array<MenuType>; isBlog: boolean }
 

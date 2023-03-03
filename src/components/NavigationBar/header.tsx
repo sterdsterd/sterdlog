@@ -14,6 +14,8 @@ export type MenuType = {
   link: string
 }
 
+export const searchIndices = [{ name: "Pages", title: "Pages" }]
+
 const Header = (props: Props) => {
   const data = useStaticQuery(graphql`
     query {

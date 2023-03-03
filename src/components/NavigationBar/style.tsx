@@ -4,13 +4,10 @@ const NavContainer = styled.div`
   position: -webkit-sticky;
   position: sticky;
   width: 100%;
+  height: 60px;
   top: 0;
   z-index: 100;
   display: grid;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
 `
 
 const DesktopNav = styled.nav`
@@ -23,16 +20,23 @@ const DesktopNav = styled.nav`
   align-items: center;
   z-index: 50;
   margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 `
 
 const MobileNav = styled.nav`
   width: 100%;
-  height: 60px;
   padding: 0 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 50;
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 `
 
 const Logo = styled.div`
@@ -53,9 +57,17 @@ const DesktopMenu = styled.div`
 `
 
 const MobileMenu = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   text-decoration: none;
+  transition: all 0.2s;
+  overflow: hidden;
+`
+
+const MobileSearch = styled.div`
+  display: flex;
+  flex-direction: column;
   transition: all 0.2s;
   overflow: hidden;
 `
@@ -73,7 +85,7 @@ const DesktopMenuItem = styled.div`
 
 const MobileMenuItem = styled.div`
   color: black;
-  padding: 8px 20px;
+  padding: 0.5rem;
   transition: all 200ms;
   font-weight: 600;
 
@@ -116,6 +128,7 @@ export {
   Logo,
   DesktopMenu,
   MobileMenu,
+  MobileSearch,
   DesktopMenuItem,
   MobileMenuItem,
   ScrollIndicator,

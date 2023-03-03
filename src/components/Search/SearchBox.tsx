@@ -15,6 +15,12 @@ const SearchForm = styled.form<{ isFocused: boolean }>`
     background-color: ${props =>
       props.isFocused ? "transparent" : "rgba(0, 0, 0, 0.05)"};
   }
+
+  @media screen and (max-width: 768px) {
+    &:hover {
+      background-color: transparent;
+    }
+  }
 `
 
 const SearchInput = styled.input<{ isFocused: boolean }>`
@@ -48,6 +54,14 @@ const SearchInput = styled.input<{ isFocused: boolean }>`
           padding-left: 2.5em;
           border: none;
         `}
+
+  @media screen and (max-width: 768px) {
+    width: calc(100vw - 3rem);
+    cursor: text;
+    margin-left: -2.5rem;
+    padding-left: 2.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
 `
 
 const SearchIcon = styled.div`
