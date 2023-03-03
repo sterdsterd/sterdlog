@@ -198,6 +198,11 @@ const config = {
                       slug
                     }
                     excerpt(pruneLength: 5000)
+                    internal {
+                      contentDigest
+                      type
+                      owner
+                    }
                   }
                 }
               }
