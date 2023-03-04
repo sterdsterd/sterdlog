@@ -8,6 +8,13 @@ const NavContainer = styled.div`
   top: 0;
   z-index: 100;
   display: grid;
+
+  @media screen and (min-width: 768px) {
+    background-color: rgba(255, 255, 255, 0.5);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  }
 `
 
 const DesktopNav = styled.nav`
@@ -20,10 +27,6 @@ const DesktopNav = styled.nav`
   align-items: center;
   z-index: 50;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.5);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 `
 
 const MobileNav = styled.nav`
