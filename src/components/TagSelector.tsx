@@ -9,15 +9,25 @@ type Props = {
 
 export const Tag = styled.span<{ isSelected: boolean }>`
   font-size: 1rem;
-  background-color: ${props => (props.isSelected ? "#f1f1f1" : "#fafafa")};
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: ${props =>
+    props.isSelected ? "var(--tag-selected-light)" : "var(--tag-bg-light)"};
+  border: 1px solid var(--border-light);
   padding: 0.3rem 0.6rem;
   border-radius: 0.4rem;
   flex-shrink: 0;
   transition: all 0.2s;
 
   &:hover {
-    background-color: #f1f1f1;
+    background-color: var(--tag-selected-light);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--tag-selected-dark);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: ${props =>
+      props.isSelected ? "var(--tag-selected-dark)" : "var(--tag-bg-dark)"};
+    border: 1px solid var(--border-dark);
   }
 `
 

@@ -13,7 +13,12 @@ const SearchForm = styled.form<{ isFocused: boolean }>`
 
   &:hover {
     background-color: ${props =>
-      props.isFocused ? "transparent" : "rgba(0, 0, 0, 0.05)"};
+      props.isFocused ? "transparent" : "var(--hover-shade-light)"};
+
+    @media (prefers-color-scheme: dark) {
+      background-color: ${props =>
+        props.isFocused ? "transparent" : "var(--hover-shade-dark)"};
+    }
   }
 
   @media screen and (max-width: 768px) {
@@ -30,21 +35,29 @@ const SearchInput = styled.input<{ isFocused: boolean }>`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   border-radius: 1rem;
-  color: #000;
+  color: var(--text-light);
 
   ::placeholder {
     color: #777;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-dark);
   }
 
   ${props =>
     props.isFocused
       ? css`
           width: 13.75rem;
-          background: #fff;
+          background: var(--card-bg-light);
           cursor: text;
           margin-left: -2.5rem;
           padding-left: 2.25rem;
           border: 1px solid rgba(0, 0, 0, 0.15);
+
+          @media (prefers-color-scheme: dark) {
+            background: var(--card-bg-dark);
+          }
         `
       : css`
           width: 0;
@@ -60,7 +73,11 @@ const SearchInput = styled.input<{ isFocused: boolean }>`
     cursor: text;
     margin-left: -2.5rem;
     padding-left: 2.25rem;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-light);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--border-dark);
+    }
   }
 `
 

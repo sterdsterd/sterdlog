@@ -41,20 +41,33 @@ const Nav = styled.nav`
 
 const NavItem = styled.div`
   padding: 16px;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: var(--card-bg-light);
+  border: 1px solid var(--border-light);
   border-radius: 0.4rem;
   height: 100%;
+  transition: all 0.2s;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--card-bg-dark);
+    border: 1px solid var(--border-dark);
+  }
 
   &:hover {
-    background-color: #eee;
+    background-color: var(--tag-selected-light);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--tag-selected-dark);
+    }
   }
 `
 
 const NavItemSubtitle = styled.div`
   font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.15);
+  color: var(--border-light);
   font-weight: 500;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--border-dark);
+  }
 `
 
 const NavItemTitle = styled.div`

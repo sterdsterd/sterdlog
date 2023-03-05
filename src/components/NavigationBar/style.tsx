@@ -8,12 +8,16 @@ const NavContainer = styled.div`
   top: 0;
   z-index: 100;
   display: grid;
-
   @media screen and (min-width: 768px) {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--navbar-light);
     -webkit-backdrop-filter: saturate(180%) blur(10px);
     backdrop-filter: saturate(180%) blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid var(--border-light);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--navbar-dark);
+      border-bottom: 1px solid var(--border-dark);
+    }
   }
 `
 
@@ -36,10 +40,15 @@ const MobileNav = styled.nav`
   justify-content: space-between;
   align-items: center;
   z-index: 50;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--navbar-light);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--border-light);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--navbar-dark);
+    border-bottom: 1px solid var(--border-dark);
+  }
 `
 
 const Logo = styled.div`
@@ -48,6 +57,13 @@ const Logo = styled.div`
   transition: 0.2s all;
   &:hover {
     opacity: 0.75;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    svg {
+      filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(308deg)
+        brightness(106%) contrast(101%);
+    }
   }
 `
 
@@ -76,29 +92,37 @@ const MobileSearch = styled.div`
 `
 
 const DesktopMenuItem = styled.div`
-  color: black;
+  color: var(--text-light);
   padding: 4px 12px;
   transition: all 200ms;
   font-weight: 600;
 
   &:hover {
-    color: #2563e1;
+    color: var(--color-primary);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-dark);
   }
 `
 
 const MobileMenuItem = styled.div`
-  color: black;
+  color: var(--text-light);
   padding: 0.5rem;
   transition: all 200ms;
   font-weight: 600;
 
   &:hover {
-    color: #2563e1;
+    color: var(--color-primary);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-dark);
   }
 `
 
 const ScrollIndicator = styled.div`
-  background-color: #2563e1;
+  background-color: var(--color-primary);
   height: 1px;
   width: 0;
   left: 0;
@@ -120,7 +144,17 @@ const IconButton = styled.button`
   padding-bottom: 0;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--hover-shade-light);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--hover-shade-dark);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    svg {
+      filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(308deg)
+        brightness(106%) contrast(101%);
+    }
   }
 `
 

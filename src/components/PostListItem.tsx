@@ -4,29 +4,40 @@ import styled from "styled-components"
 import Tags from "./Tags"
 
 const Tile = styled.div`
-  background-color: #fff;
+  background-color: var(--card-bg-light);
   display: flex;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-light);
   border-radius: 1rem;
   box-shadow: 0 0.375rem 0.625rem rgba(0, 0, 0, 0.05);
   overflow: hidden;
   position: relative;
-  color: black;
+  color: var(--text-light);
   transition: all 200ms;
   height: 100%;
 
   &:hover {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-light);
+    color: var(--text-light);
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--border-dark);
+      color: var(--text-dark);
+    }
   }
 
   &:hover h2 {
-    color: #2563e1;
+    color: var(--color-primary);
     transition: all 200ms;
   }
 
   &:hover img {
     transform: scale(1.05);
     transition: all 200ms;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-dark);
+    background-color: var(--card-bg-dark);
   }
 `
 

@@ -3,11 +3,18 @@ import styled from "styled-components"
 
 export const Tag = styled.span`
   font-size: 0.9rem;
-  background-color: #fafafa;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: var(--text-light);
+  background-color: var(--tag-bg-light);
+  border: 1px solid var(--border-light);
   padding: 0.25rem 0.5rem;
   border-radius: 0.4rem;
   flex-shrink: 0;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-dark);
+    background-color: var(--tag-bg-dark);
+    border: 1px solid var(--border-dark);
+  }
 `
 
 export const TagContainer = styled.div`

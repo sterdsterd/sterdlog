@@ -31,12 +31,9 @@ const HitItemContainer = styled.div`
   border-radius: 1rem;
   padding: 1.5rem;
   &:hover {
-    background-color: #f1f1f1;
-  }
-
-  @media screen and (max-width: 768px) {
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--hover-shade-light);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--hover-shade-dark);
     }
   }
 `
@@ -62,7 +59,11 @@ const StyledHits = styled(Hits)`
     margin-bottom: 1em;
 
     a {
-      color: #000;
+      color: var(--text-light);
+
+      @media (prefers-color-scheme: dark) {
+        color: var(--text-dark);
+      }
 
       h4 {
         margin-top: 0;
@@ -71,7 +72,7 @@ const StyledHits = styled(Hits)`
     }
 
     mark {
-      color: #2563e1;
+      color: var(--color-primary);
       background-color: transparent;
     }
   }
@@ -109,8 +110,12 @@ const SearchResultContainer = styled.div<{ isVisible: boolean }>`
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 1rem;
   border-radius: 1rem;
-  background: #fff;
+  background: var(--card-bg-light);
   transform: translateX(-16.7rem);
+
+  @media (prefers-color-scheme: dark) {
+    background: var(--card-bg-dark);
+  }
 
   .ais-PoweredBy {
     display: flex;
@@ -124,7 +129,7 @@ const SearchResultContainer = styled.div<{ isVisible: boolean }>`
       svg {
         width: 70px;
         path {
-          fill: #2563e1;
+          fill: var(--color-primary);
         }
       }
     }

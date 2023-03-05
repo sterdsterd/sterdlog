@@ -10,19 +10,24 @@ import Tags from "./Tags"
 import PortfolioModal from "../components/Portfolio/PortfolioModal"
 
 const Card = styled.div`
-  background-color: #fff;
+  background-color: var(--card-bg-light);
   display: flex;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-light);
   border-radius: 1rem;
   box-shadow: 0 0.375rem 0.625rem rgba(0, 0, 0, 0.05);
   overflow: hidden;
   position: relative;
-  color: black;
+  color: var(--text-light);
   transition: all 200ms;
   height: 100%;
   width: 100%;
   padding: 1.625rem 1.75rem;
   flex-direction: column;
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-dark);
+    background-color: var(--card-bg-dark);
+    border: 1px solid var(--border-dark);
+  }
 `
 
 const ProjectDate = styled.span`
@@ -52,7 +57,10 @@ const Button = styled.button`
   flex-shrink: 0;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--hover-shade-light);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--hover-shade-dark);
+    }
   }
 `
 

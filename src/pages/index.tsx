@@ -37,6 +37,13 @@ const IconContainer = styled.div`
   position: absolute;
   bottom: 10%;
   animation: ${arrowAnimation} 2s cubic-bezier(0.16, 1, 0.3, 1) infinite 1s;
+
+  @media (prefers-color-scheme: dark) {
+    svg {
+      filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(308deg)
+        brightness(106%) contrast(101%);
+    }
+  }
 `
 
 const MainContainer = styled.div`
@@ -49,11 +56,21 @@ const MainContainer = styled.div`
   overflow: hidden;
   background: repeating-radial-gradient(
       circle at 50%,
-      #fbfbfb 0rem,
-      #ffffff 12rem
+      var(--gradient-darker-light) 0rem,
+      var(--gradient-lighter-light) 12rem
     )
     fixed;
   background-attachment: scroll;
+
+  @media (prefers-color-scheme: dark) {
+    background: repeating-radial-gradient(
+        circle at 50%,
+        var(--gradient-darker-dark) 0rem,
+        var(--gradient-lighter-dark) 12rem
+      )
+      fixed;
+    background-attachment: scroll;
+  }
 `
 
 const DateText = styled.span`
@@ -67,30 +84,61 @@ const LogoContainer = styled.div`
   animation: ${scaleAnimation} 1s cubic-bezier(0.16, 1, 0.3, 1);
 `
 
-const Upper = styled.div`
+const linearToEase = (n: number) => {
+  if (n < 0) return 0
+  else if (n > 1) return 1
+  else return (n * n) / (2 * (n * n - n) + 1)
+}
+
+const Upper = styled.div<{ angle: number }>`
   position: absolute;
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
   margin: 0 auto;
+  background: conic-gradient(
+    from ${props => 90 - linearToEase(props.angle * 1.2) * 45}deg,
+    rgba(0, 0, 0, 0) 150deg,
+    rgba(0, 0, 0, 1) ${props => 180 + linearToEase(props.angle * 1.2) * 120}deg
+  );
+  top: ${props => 1.25 - 1.25 * linearToEase(props.angle)}rem;
+
+  @media (prefers-color-scheme: dark) {
+    background: conic-gradient(
+      from ${props => 90 - linearToEase(props.angle * 1.2) * 45}deg,
+      rgba(255, 255, 255, 0) 150deg,
+      rgba(255, 255, 255, 1)
+        ${props => 180 + linearToEase(props.angle * 1.2) * 120}deg
+    );
+  }
 `
 
-const Lower = styled.div`
+const Lower = styled.div<{ angle: number }>`
   position: absolute;
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
   margin: 0 auto;
+  background: conic-gradient(
+    from ${props => 270 - linearToEase(props.angle * 1.2) * 45}deg,
+    rgba(0, 0, 0, 0) 150deg,
+    rgba(0, 0, 0, 1) ${props => 180 + linearToEase(props.angle * 1.2) * 120}deg
+  );
+
+  top: ${props => 1.25 + 1.25 * linearToEase(props.angle)}rem;
+
+  @media (prefers-color-scheme: dark) {
+    background: conic-gradient(
+      from ${props => 270 - linearToEase(props.angle * 1.2) * 45}deg,
+      rgba(255, 255, 255, 0) 150deg,
+      rgba(255, 255, 255, 1)
+        ${props => 180 + linearToEase(props.angle * 1.2) * 120}deg
+    );
+  }
 `
 
 const Blog = () => {
   const [angle, setAngle] = useState<number>(-0.4)
-
-  const linearToEase = (n: number) => {
-    if (n < 0) return 0
-    else if (n > 1) return 1
-    else return (n * n) / (2 * (n * n - n) + 1)
-  }
 
   useEffect(() => {
     const c = setInterval(() => {
@@ -107,26 +155,8 @@ const Blog = () => {
       <Header isBlog={false} />
       <MainContainer>
         <LogoContainer>
-          <Upper
-            style={{
-              background: `conic-gradient(
-            from ${90 - linearToEase(angle * 1.2) * 45}deg,
-            rgba(0, 0, 0, 0) 150deg,
-            rgba(0, 0, 0, 1) ${180 + linearToEase(angle * 1.2) * 120}deg
-          )`,
-              top: `${1.25 - 1.25 * linearToEase(angle)}rem`,
-            }}
-          />
-          <Lower
-            style={{
-              background: `conic-gradient(
-              from ${270 - linearToEase(angle * 1.2) * 45}deg,
-              rgba(0, 0, 0, 0) 150deg,
-              rgba(0, 0, 0, 1) ${180 + linearToEase(angle * 1.2) * 120}deg
-          )`,
-              top: `${1.25 + 1.25 * linearToEase(angle)}rem`,
-            }}
-          />
+          <Upper angle={angle} />
+          <Lower angle={angle} />
         </LogoContainer>
         <IconContainer>
           <svg

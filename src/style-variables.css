@@ -1,0 +1,25 @@
+:root {
+  --bg-light: #fff;
+  --bg-dark: #000;
+  --text-light: #2e353f;
+  --text-dark: #fff;
+  --navbar-light: rgba(255, 255, 255, 0.5);
+  --navbar-dark: rgba(0, 0, 0, 0.5);
+  --card-bg-light: #fff;
+  --card-bg-dark: #111;
+  --light-grey-light: #fafafa;
+  --light-grey-dark: #111;
+  --border-light: rgba(0, 0, 0, 0.15);
+  --border-dark: rgba(255, 255, 255, 0.15);
+  --hover-shade-light: rgba(0, 0, 0, 0.05);
+  --hover-shade-dark: rgba(255, 255, 255, 0.08);
+  --tag-bg-light: #fafafa;
+  --tag-bg-dark: #222;
+  --tag-selected-light: #f1f1f1;
+  --tag-selected-dark: #333;
+
+  --gradient-darker-light: #fbfbfb;
+  --gradient-lighter-light: #ffffff;
+  --gradient-darker-dark: #070707;
+  --gradient-lighter-dark: #000;
+}

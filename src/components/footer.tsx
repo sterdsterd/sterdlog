@@ -4,10 +4,13 @@ import styled from "styled-components"
 const FooterContainer = styled.footer`
   border-radius: 1rem;
   font-size: 0.875rem;
-  background-color: #fafafa;
+  background-color: var(--light-grey-light);
   padding: 1.5rem;
   margin-top: 2.5rem;
   text-align: center;
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--light-grey-dark);
+  }
 `
 
 const Footer = () => {

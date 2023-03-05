@@ -38,12 +38,15 @@ const ModalContents = styled.section`
   padding-top: 0;
   margin: 0 auto;
   border-radius: 1rem;
-  background-color: #fff;
+  background-color: var(--card-bg-light);
   transition: all 0.2s;
   overflow: scroll;
   overflow-x: hidden;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   animation: modal-show 0.2s;
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--card-bg-dark);
+  }
 `
 
 const ModalBody = styled.iframe`
@@ -63,10 +66,6 @@ const PortfolioModal = (props: Props) => {
       ) as HTMLIFrameElement
       if (frame !== null) {
         setFrameHeight(frame?.contentWindow?.document.body.scrollHeight + "px")
-        console.log(
-          "height",
-          frame?.contentWindow?.document.body.scrollHeight + "px"
-        )
       }
     }, 500)
 
@@ -85,13 +84,6 @@ const PortfolioModal = (props: Props) => {
             style={{
               display: "flex",
               flexDirection: "column",
-              top: "0",
-              height: "5rem",
-              right: "0",
-              position: "sticky",
-              backdropFilter: "blur(20px)",
-              backgroundColor: "#fff",
-              mask: "linear-gradient(black 30%, transparent)",
             }}
           >
             <IconButton

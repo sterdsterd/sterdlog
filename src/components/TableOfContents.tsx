@@ -44,10 +44,18 @@ const ListItemLink = styled.a.attrs((props: { isActive: boolean }) => props)`
   padding: 0.8rem;
   transition: all 0.2s;
   border-radius: 0.5rem;
-  color: ${props => (props.isActive ? "#2563e1" : "#000000")};
+  color: ${props =>
+    props.isActive ? "var(--color-primary)" : "var(--text-light)"};
+  @media (prefers-color-scheme: dark) {
+    color: ${props =>
+      props.isActive ? "var(--color-primary)" : "var(--text-dark)"};
+  }
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--hover-shade-light);
     color: #2563e1;
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--hover-shade-dark);
+    }
   }
 `
 
