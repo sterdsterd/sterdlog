@@ -7,6 +7,7 @@ export const Tag = styled.span`
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 0.25rem 0.5rem;
   border-radius: 0.4rem;
+  flex-shrink: 0;
 `
 
 export const TagContainer = styled.div`

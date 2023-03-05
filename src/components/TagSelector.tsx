@@ -13,6 +13,8 @@ export const Tag = styled.span<{ isSelected: boolean }>`
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 0.3rem 0.6rem;
   border-radius: 0.4rem;
+  flex-shrink: 0;
+  transition: all 0.2s;
 
   &:hover {
     background-color: #f1f1f1;
@@ -23,6 +25,7 @@ export const TagContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-items: center;
+  flex-basis: auto;
   align-items: center;
   gap: 0.8rem;
   overflow-x: scroll;

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 
@@ -14,9 +14,27 @@ type Props = {
   location: Location
 }
 
+type Post = {
+  readonly childMdx: {
+    readonly excerpt: string | null
+    readonly fields: {
+      readonly slug: string | null
+    } | null
+    readonly frontmatter: {
+      readonly date: string | null
+      readonly title: string | null
+      readonly description: string | null
+      readonly emoji: string | null
+      readonly tags: readonly (string | null)[] | null
+    } | null
+  } | null
+}
+
 const BlogIndex = ({ data, location }: Props) => {
   const posts = data.allFile.nodes.filter(post => post.childMdx)
   const [selectedTag, setSelectedTag] = useState<string>("모든 글")
+  var tagsList: string[] = []
+  var [filteredPostList, setFilteredPostList] = useState<Array<Post>>([])
 
   if (posts.length === 0) {
     return (
@@ -26,15 +44,29 @@ const BlogIndex = ({ data, location }: Props) => {
     )
   }
 
-  var tagsList: string[] = []
-
   posts.forEach(post => {
     post.childMdx?.frontmatter?.tags?.forEach(it => {
       if (!tagsList.includes(it!)) tagsList.push(it!)
     })
   })
 
+  posts.reduce
+
   tagsList.sort()
+
+  useEffect(() => {
+    setFilteredPostList([
+      ...posts.filter(post =>
+        selectedTag === "모든 글"
+          ? post
+          : post.childMdx?.frontmatter?.tags?.includes(selectedTag)
+      ),
+    ])
+
+    return () => {
+      setFilteredPostList([])
+    }
+  }, [selectedTag])
 
   return (
     <Layout isBlog={true}>
@@ -42,7 +74,7 @@ const BlogIndex = ({ data, location }: Props) => {
         <h1 style={{ marginBottom: "0.5rem" }}>
           {selectedTag === "모든 글" ? selectedTag : `#${selectedTag}`}
         </h1>
-        <p>총 {posts.length}개의 글이 있어요</p>
+        <p>총 {filteredPostList.length}개의 글이 있어요</p>
         <TagSelector
           tags={tagsList}
           setSelectedTag={setSelectedTag}
@@ -50,26 +82,20 @@ const BlogIndex = ({ data, location }: Props) => {
         />
       </div>
       <PostWrapper>
-        {posts
-          .filter(post =>
-            selectedTag === "모든 글"
-              ? post
-              : post.childMdx?.frontmatter?.tags?.includes(selectedTag)
-          )
-          .map(post => {
-            var mdx = post.childMdx!
+        {filteredPostList.map(post => {
+          var mdx = post.childMdx!
 
-            return (
-              <PostListItem
-                slug={mdx.fields?.slug!}
-                emoji={mdx.frontmatter?.emoji!}
-                title={mdx.frontmatter?.title!}
-                date={mdx.frontmatter?.date!}
-                description={mdx.frontmatter?.description || mdx.excerpt!}
-                tags={mdx.frontmatter?.tags!}
-              />
-            )
-          })}
+          return (
+            <PostListItem
+              slug={mdx.fields?.slug!}
+              emoji={mdx.frontmatter?.emoji!}
+              title={mdx.frontmatter?.title!}
+              date={mdx.frontmatter?.date!}
+              description={mdx.frontmatter?.description || mdx.excerpt!}
+              tags={mdx.frontmatter?.tags!}
+            />
+          )
+        })}
       </PostWrapper>
     </Layout>
   )
