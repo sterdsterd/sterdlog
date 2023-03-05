@@ -119,7 +119,7 @@ const PortfolioListItem = (props: Props) => {
           margin: "-0.5rem -0.375rem",
         }}
       >
-        <Tags tags={props.tags} />
+        <Tags tags={props.tags} isHashVisible={false} />
         <Button onClick={() => setModalVisible(true)}>자세히 보기 →</Button>
       </div>
       <PortfolioModal

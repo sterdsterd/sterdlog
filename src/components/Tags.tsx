@@ -23,13 +23,19 @@ export const TagContainer = styled.div`
 
 type Props = {
   tags: readonly (string | null)[]
+  isHashVisible: boolean
 }
 
 const Tags = (props: Props) => {
   return (
     <TagContainer>
       {props.tags.map(it => {
-        return <Tag key={it}>{it}</Tag>
+        return (
+          <Tag key={it}>
+            {props.isHashVisible ? "#" : ""}
+            {it}
+          </Tag>
+        )
       })}
     </TagContainer>
   )

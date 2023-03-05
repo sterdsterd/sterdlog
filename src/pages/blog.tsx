@@ -1,12 +1,13 @@
 import * as React from "react"
+import { useState } from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
-import { StaticImage } from "gatsby-plugin-image"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import PostListItem from "../components/PostListItem"
+import Tags from "../components/Tags"
+import TagSelector from "../components/TagSelector"
 
 type Props = {
   data: Queries.PostListPageQuery
@@ -15,6 +16,7 @@ type Props = {
 
 const BlogIndex = ({ data, location }: Props) => {
   const posts = data.allFile.nodes.filter(post => post.childMdx)
+  const [selectedTag, setSelectedTag] = useState<string>("모든 글")
 
   if (posts.length === 0) {
     return (
@@ -24,26 +26,50 @@ const BlogIndex = ({ data, location }: Props) => {
     )
   }
 
+  var tagsList: string[] = []
+
+  posts.forEach(post => {
+    post.childMdx?.frontmatter?.tags?.forEach(it => {
+      if (!tagsList.includes(it!)) tagsList.push(it!)
+    })
+  })
+
+  tagsList.sort()
+
   return (
     <Layout isBlog={true}>
       <div style={{ paddingLeft: "1rem" }}>
-        <h1 style={{ marginBottom: "0.5rem" }}>모든 글</h1>
+        <h1 style={{ marginBottom: "0.5rem" }}>
+          {selectedTag === "모든 글" ? selectedTag : `#${selectedTag}`}
+        </h1>
         <p>총 {posts.length}개의 글이 있어요</p>
+        <TagSelector
+          tags={tagsList}
+          setSelectedTag={setSelectedTag}
+          selectedTag={selectedTag}
+        />
       </div>
       <PostWrapper>
-        {posts.map(post => {
-          var mdx = post.childMdx!
-
-          return (
-            <PostListItem
-              slug={mdx.fields?.slug!}
-              emoji={mdx.frontmatter?.emoji!}
-              title={mdx.frontmatter?.title!}
-              date={mdx.frontmatter?.date!}
-              description={mdx.frontmatter?.description || mdx.excerpt!}
-            />
+        {posts
+          .filter(post =>
+            selectedTag === "모든 글"
+              ? post
+              : post.childMdx?.frontmatter?.tags?.includes(selectedTag)
           )
-        })}
+          .map(post => {
+            var mdx = post.childMdx!
+
+            return (
+              <PostListItem
+                slug={mdx.fields?.slug!}
+                emoji={mdx.frontmatter?.emoji!}
+                title={mdx.frontmatter?.title!}
+                date={mdx.frontmatter?.date!}
+                description={mdx.frontmatter?.description || mdx.excerpt!}
+                tags={mdx.frontmatter?.tags!}
+              />
+            )
+          })}
       </PostWrapper>
     </Layout>
   )
@@ -87,6 +113,7 @@ export const pageQuery = graphql`
             title
             description
             emoji
+            tags
           }
         }
       }

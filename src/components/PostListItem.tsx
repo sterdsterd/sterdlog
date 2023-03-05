@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import Tags from "./Tags"
 
 const Tile = styled.div`
   background-color: #fff;
@@ -49,6 +50,7 @@ const TileTitle = styled.h2`
 const TileDescription = styled.p`
   margin: 0;
   padding-top: 0.5rem;
+  margin-bottom: 1rem;
   @media screen and (max-width: 768px) {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -77,6 +79,7 @@ type Props = {
   title: string
   date: string
   description: string
+  tags: readonly (string | null)[]
 }
 
 const PostListItem = (props: Props) => {
@@ -92,6 +95,7 @@ const PostListItem = (props: Props) => {
               <TileDescription itemProp="description">
                 {props.description}
               </TileDescription>
+              <Tags tags={props.tags} isHashVisible={true} />
             </div>
           </TileContents>
         </article>
