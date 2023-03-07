@@ -65,7 +65,7 @@ const PortfolioModal = (props: Props) => {
         "modalBody"
       ) as HTMLIFrameElement
       if (frame !== null) {
-        setFrameHeight(frame?.contentWindow?.document.body.scrollHeight + "px")
+        setFrameHeight(frame.contentWindow?.document.body.scrollHeight + "px")
       }
     }, 500)
 
@@ -109,7 +109,7 @@ const PortfolioModal = (props: Props) => {
             id="modalBody"
             src={`.${props.slug}`}
             style={{
-              height: `calc(2rem + ${frameHeight})`,
+              height: `calc(${frameHeight})`,
               overflow: "hidden",
             }}
             scrolling="no"

@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactNode, SetStateAction } from "react"
+import React, { Dispatch, useEffect, SetStateAction } from "react"
 import styled from "styled-components"
 import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
@@ -11,6 +11,15 @@ type Props = {
   children?: JSX.Element
   setVisible: Dispatch<SetStateAction<boolean>>
 }
+
+const Container = styled.div`
+  padding-bottom: 1rem;
+  background-color: var(--card-bg-light);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--card-bg-dark);
+  }
+`
 
 const Title = styled.h1`
   margin-top: 1rem;
@@ -30,16 +39,16 @@ const IFrameLink = props => {
   return (
     <a {...props} target="_parent">
       {props.children}
+
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="1rem"
         viewBox="0 96 960 960"
         width="1rem"
-        style={{ verticalAlign: "baseline", marginBottom: "-0.1rem" }}
       >
         <path
           fill="#2563e1"
-          d="M206.783 955.218q-44.305 0-75.153-30.848-30.848-30.848-30.848-75.153V302.783q0-44.305 30.848-75.153 30.848-30.848 75.153-30.848H480v106.001H206.783v546.434h546.434V576h106.001v273.217q0 44.305-30.848 75.153-30.848 30.848-75.153 30.848H206.783ZM405.523 724 332 650.477l347.694-347.694H560V196.782h299.218V496H753.217V376.306L405.523 724Z"
+          d="M185.087 950.131q-32.507 0-55.862-23.356-23.356-23.355-23.356-55.862V281.087q0-32.74 23.356-56.262 23.355-23.521 55.862-23.521H459v79.783H185.087v589.826h589.826V597h79.783v273.913q0 32.507-23.521 55.862-23.522 23.356-56.262 23.356H185.087ZM395.001 717 340 660.999l379.912-379.912H519v-79.783h335.696V537h-79.783V337.088L395.001 717Z"
         />
       </svg>
     </a>
@@ -48,7 +57,7 @@ const IFrameLink = props => {
 
 const PortfolioContent = (props: Props) => {
   return (
-    <>
+    <Container>
       <header
         style={{
           display: "flex",
@@ -75,7 +84,7 @@ const PortfolioContent = (props: Props) => {
           </article>
         </MDXProvider>
       </div>
-    </>
+    </Container>
   )
 }
 
