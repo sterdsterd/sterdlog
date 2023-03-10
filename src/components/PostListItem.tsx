@@ -72,6 +72,7 @@ const TileDescription = styled.p`
 `
 
 const Emoji = styled.p`
+  font-family: "Tossface";
   margin-top: -1rem;
   margin-bottom: 0;
   margin-left: -0.35rem;
