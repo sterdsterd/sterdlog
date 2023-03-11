@@ -63,21 +63,21 @@ type Props = {
 const Paginator = ({ previous, next }: Props) => {
   return (
     <Nav>
-      {previous ? (
-        <Link to={previous.fields?.slug!} rel="prev">
+      {next ? (
+        <Link to={next.fields?.slug!} rel="next">
           <NavItem>
-            <NavItemSubtitle>이전 글</NavItemSubtitle>
-            <NavItemTitle>← {previous.frontmatter?.title}</NavItemTitle>
+            <NavItemSubtitle>다음 글</NavItemSubtitle>
+            <NavItemTitle>← {next.frontmatter?.title}</NavItemTitle>
           </NavItem>
         </Link>
       ) : (
         <div></div>
       )}
-      {next && (
-        <Link to={next.fields?.slug!} rel="next">
+      {previous && (
+        <Link to={previous.fields?.slug!} rel="prev">
           <NavItem style={{ textAlign: "right" }}>
-            <NavItemSubtitle>다음 글</NavItemSubtitle>
-            <NavItemTitle>{next.frontmatter?.title} →</NavItemTitle>
+            <NavItemSubtitle>이전 글</NavItemSubtitle>
+            <NavItemTitle>{previous.frontmatter?.title} →</NavItemTitle>
           </NavItem>
         </Link>
       )}
