@@ -21,13 +21,13 @@ const config = {
   siteMetadata: {
     title: `sterdlog`,
     author: {
-      name: `Yulwon Rhee`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `이율원`,
+      summary: `세상을 움직이는 개발자 이율원입니다.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `이율원의 개발 이야기`,
     siteUrl: `https://sterd.dev/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: ``,
     },
     menu: [
       {
@@ -213,6 +213,15 @@ const config = {
             settings: { attributesToSnippet: [`excerpt:20`] },
           },
         ],
+      },
+    },
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://sterd.dev",
+        sitemap: "https://sterd.dev/sitemap-0.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
       },
     },
   ],
