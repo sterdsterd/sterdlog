@@ -5,18 +5,9 @@ import TableOfContents from "../components/TableOfContents"
 import Giscus from "@giscus/react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import {
-  PostContainer,
-  Post,
-  Header,
-  Title,
-  ArticleInfo,
-  Nav,
-  NavItem,
-  NavItemSubtitle,
-  NavItemTitle,
-} from "./styles"
+import { PostContainer, Post, Header, Title, ArticleInfo } from "./styles"
 import Tags from "../components/Tags"
+import Paginator from "../components/Paginator"
 
 type Props = {
   data: Queries.BlogPostBySlugQuery
@@ -69,26 +60,7 @@ const BlogPostTemplate = ({
               loading="lazy"
             />
           </footer>
-          <Nav>
-            {previous ? (
-              <Link to={previous.fields?.slug!} rel="prev">
-                <NavItem>
-                  <NavItemSubtitle>이전 글</NavItemSubtitle>
-                  <NavItemTitle>← {previous.frontmatter?.title}</NavItemTitle>
-                </NavItem>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-            {next && (
-              <Link to={next.fields?.slug!} rel="next">
-                <NavItem style={{ textAlign: "right" }}>
-                  <NavItemSubtitle>다음 글</NavItemSubtitle>
-                  <NavItemTitle>{next.frontmatter?.title} →</NavItemTitle>
-                </NavItem>
-              </Link>
-            )}
-          </Nav>
+          <Paginator previous={previous} next={next} />
         </article>
       </MDXProvider>
     </Layout>
