@@ -18,6 +18,13 @@ const Post = styled.section`
   }
 `
 
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+`
+
 const Title = styled.h1`
   font-size: 48px;
   font-weight: 700;
@@ -78,6 +85,7 @@ const NavItemTitle = styled.div`
 export {
   PostContainer,
   Post,
+  Header,
   Title,
   ArticleInfo,
   Nav,

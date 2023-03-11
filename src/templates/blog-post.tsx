@@ -8,6 +8,7 @@ import Seo from "../components/seo"
 import {
   PostContainer,
   Post,
+  Header,
   Title,
   ArticleInfo,
   Nav,
@@ -15,6 +16,7 @@ import {
   NavItemSubtitle,
   NavItemTitle,
 } from "./styles"
+import Tags from "../components/Tags"
 
 type Props = {
   data: Queries.BlogPostBySlugQuery
@@ -33,10 +35,11 @@ const BlogPostTemplate = ({
     <Layout isBlog={true}>
       <MDXProvider>
         <article itemScope itemType="http://schema.org/Article">
-          <header>
+          <Header>
             <Title itemProp="headline">{post?.frontmatter?.title}</Title>
             <ArticleInfo>{post?.frontmatter?.date}</ArticleInfo>
-          </header>
+            <Tags tags={post?.frontmatter?.tags!} isHashVisible={true} />
+          </Header>
           <PostContainer>
             <>
               <Post itemProp="articleBody">{children}</Post>
@@ -47,6 +50,10 @@ const BlogPostTemplate = ({
           </PostContainer>
           <hr />
           <footer>
+            <p style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              태그:{" "}
+              <Tags tags={post?.frontmatter?.tags!} isHashVisible={true} />
+            </p>
             <Giscus
               id="comments"
               repo="sterdsterd/sterdlog-comments"
@@ -122,6 +129,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "YYYY년 M월 D일")
         description
+        tags
       }
     }
     previous: mdx(id: { eq: $previousPostId }) {
