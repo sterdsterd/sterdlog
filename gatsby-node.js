@@ -110,7 +110,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   if (modals.length > 0) {
     modals.forEach((post, index) => {
       createPage({
-        path: `/portfolio${post.childMdx.fields.slug}`,
+        path: `${post.childMdx.fields.slug}`,
         component: `${portfolioModal}?__contentFilePath=${post.childMdx.internal.contentFilePath}`,
         context: {
           id: post.childMdx.id,

@@ -120,7 +120,7 @@ const PostWrapper = styled.ol`
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = () => <Seo title="모든 포스트" />
+export const Head = () => <Seo title="블로그" />
 
 export const pageQuery = graphql`
   query PostListPage {

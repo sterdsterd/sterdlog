@@ -107,7 +107,7 @@ const PortfolioModal = (props: Props) => {
           </header>
           <ModalBody
             id="modalBody"
-            src={`.${props.slug}`}
+            src={`..${props.slug}`}
             style={{
               height: `calc(${frameHeight})`,
               overflow: "hidden",
