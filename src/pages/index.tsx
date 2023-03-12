@@ -4,6 +4,7 @@ import Header from "../components/NavigationBar/header"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Footer from "../components/footer"
+import { Link } from "gatsby"
 
 type Props = {}
 
@@ -77,6 +78,19 @@ const DateText = styled.span`
   color: #777;
 `
 
+const LinkText = styled.a`
+  text-decoration: underline;
+  color: var(--text-light);
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-dark);
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 const LogoContainer = styled.div`
   position: relative;
   width: 10rem;
@@ -137,6 +151,25 @@ const Lower = styled.div<{ angle: number }>`
   }
 `
 
+const Button = styled.button`
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  transition: all 0.2s;
+  padding: 0.8rem 0.9rem;
+  font-weight: 700;
+  color: #2563e1;
+  flex-shrink: 0;
+  margin-top: 1rem;
+  margin-left: -0.5rem;
+  &:hover {
+    background-color: var(--hover-shade-light);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--hover-shade-dark);
+    }
+  }
+`
+
 const Blog = () => {
   const [angle, setAngle] = useState<number>(-0.4)
 
@@ -185,8 +218,11 @@ const Blog = () => {
           </h1>
           <h2>학력</h2>
           <p>
-            건국대학교 컴퓨터공학부 22학번
-            <DateText>, 2022년 03월 - 현재</DateText>
+            <LinkText href="https://cse.konkuk.ac.kr/">
+              건국대학교 컴퓨터공학부
+            </LinkText>{" "}
+            22학번 재학
+            <DateText>, 2022년 3월 - 현재</DateText>
           </p>
           <h2>수상 경력</h2>
           <p>
@@ -196,37 +232,18 @@ const Blog = () => {
             2017년 앤어워드 디지털 창의 학생 공모전 우수상 수상
             <DateText>, 2018년 1월</DateText>
           </p>
-          <h2>프로젝트</h2>
-          <h4>
+          <h2>주요 프로젝트</h2>
+          <p>
             통학 차량 탑승 학생 자동 출석 체크 솔루션 개발
             <DateText>, 2019년 7월</DateText>
-          </h4>
-          <p>
-            BLE 비콘을 사용하여 통학 차량에 학생이 탑승했는지 자동으로 체크하고,
-            교실에 입실한 학생과 대조하여 출석을 자동으로 체크할 수 있는
-            안드로이드 어플리케이션을 기획하고, Kotlin을 사용하여 개발했습니다.
-            Backend는 Firebase를 사용하여 구현했습니다. 2019 삼성 주니어
-            소프트웨어 창작대회에 제출하여 최우수상을 수상했습니다.
-          </p>
-          <h4>
-            웹 기반 키오스크 솔루션 개발<DateText>, 2019년 5월</DateText>
-          </h4>
-          <p>
-            웹 환경에서 사용할 수 있는 키오스크 웹 앱을 HTML, CSS, Javascript,
-            JQuery를 사용하여 개발했습니다. 주문 통계 및 주문 내역을 확인할 수
-            있는 안드로이드 어플리케이션은 Kotlin을 사용하여 개발했습니다.
-            Backend는 Firebase를 사용하여 구현했습니다.
-          </p>
-          <h4>
+            <br />웹 기반 키오스크 솔루션 개발<DateText>, 2019년 5월</DateText>
+            <br />
             암호화폐 모의 투자 안드로이드 어플리케이션 개발
             <DateText>, 2017년 11월</DateText>
-          </h4>
-          <p>
-            기존의 MTS와 비슷한 사용자 경험으로 암호화폐 모의 투자를 할 수 있는
-            안드로이드 어플리케이션을 기획하고, Java를 사용한 어플리케이션의 UI
-            개발에 참여했습니다. Backend는 Firebase를 사용하여 구현했습니다.
-            2017 앤어워드 디지털 창의 학생 공모전에 제출하여 우수상을
-            수상했습니다.
+            <br />
+            <Link to={`/portfolio`}>
+              <Button>더 다양한 프로젝트 구경하기 →</Button>
+            </Link>
           </p>
         </div>
         <Footer />
