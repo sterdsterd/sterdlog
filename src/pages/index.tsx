@@ -174,44 +174,46 @@ const Blog = () => {
   const refAngle = useRef<number>(-0.4)
   const [angle, setAngle] = useState<number>(-0.4)
   // const [fps, setFps] = useState<string>("")
-  const FPS = 1000 / 60
-  var then: Date
-  var startTime: Date
+  // const FPS = 1000 / 60
+  var then: number
+  var startTime: number
   var frameCount: number = 0
 
   const animate = () => {
     if (refAngle.current > 1) return
 
-    var now: Date = new Date()
-    var elapsed: number = now.getTime() - then.getTime()
+    var now: number = performance.now()
+    // var elapsed: number = now - then
 
-    if (elapsed > FPS) {
-      then = new Date(now.getTime() - (elapsed % FPS))
+    // if (elapsed > FPS) {
+    // then = new Date(now.getTime() - (elapsed % FPS))
+    // then = now - (elapsed % FPS)
 
-      var sinceStart = now.getTime() - startTime.getTime()
-      var currentFps =
-        Math.round((1000 / (sinceStart / ++frameCount)) * 100) / 100
+    var sinceStart = now - startTime
+    var currentFps =
+      Math.round((1000 / (sinceStart / ++frameCount)) * 100) / 100
 
-      setAngle(refAngle.current + 1.25 / currentFps)
+    refAngle.current += 1.25 / currentFps
+    setAngle(refAngle.current)
 
-      // setFps(
-      //   "Elapsed time: " +
-      //     Math.round((sinceStart / 1000) * 100) / 100 +
-      //     " secs<br />@ " +
-      //     currentFps +
-      //     " fps<br />angle: " +
-      //     refAngle.current +
-      //     "<br />"
-      // )
-    }
+    // setFps(
+    //   "Elapsed time: " +
+    //     Math.round((sinceStart / 1000) * 100) / 100 +
+    //     " secs<br />@ " +
+    //     currentFps +
+    //     " fps<br />angle: " +
+    //     refAngle.current +
+    //     "<br />"
+    // )
+    // }
 
     requestAnimationFrame(animate)
   }
 
   useEffect(() => {
-    then = new Date()
+    then = performance.now()
     startTime = then
-    // console.log(startTime)
+    console.log(startTime)
     var animationFrame = requestAnimationFrame(animate)
 
     return () => {
@@ -219,16 +221,12 @@ const Blog = () => {
     }
   }, [])
 
-  useEffect(() => {
-    refAngle.current = angle
-  }, [angle])
-
   return (
     <>
       <Header isBlog={false} />
       <MainContainer>
         {/* <h1
-          style={{ fontFamily: "monospace" }}
+          style={{ fontFamily: "monospace", fontSize: "0.5rem" }}
           dangerouslySetInnerHTML={{ __html: fps }}
         /> */}
         <LogoContainer>
