@@ -31,6 +31,9 @@ const DesktopNav = styled.nav`
   align-items: center;
   z-index: 50;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const MobileNav = styled.nav`
@@ -48,6 +51,10 @@ const MobileNav = styled.nav`
   @media (prefers-color-scheme: dark) {
     background-color: var(--navbar-dark);
     border-bottom: 1px solid var(--border-dark);
+  }
+
+  @media (min-width: 769px) {
+    display: none;
   }
 `
 

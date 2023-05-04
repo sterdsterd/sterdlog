@@ -11,6 +11,7 @@ import {
 } from "./style"
 import SterdLogoSVG from "../logoSVG"
 import Search from "../Search/Search"
+import styled from "styled-components"
 
 type Props = { menus: Array<MenuType> }
 
