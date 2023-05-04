@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import styled, { keyframes } from "styled-components"
 import Header from "../components/NavigationBar/header"
 import Layout from "../components/layout"
@@ -171,22 +171,66 @@ const Button = styled.button`
 `
 
 const Blog = () => {
+  const refAngle = useRef<number>(-0.4)
   const [angle, setAngle] = useState<number>(-0.4)
+  // const [fps, setFps] = useState<string>("")
+  const FPS = 1000 / 60
+  var then: Date
+  var startTime: Date
+  var frameCount: number = 0
+
+  const animate = () => {
+    if (refAngle.current > 1) return
+
+    var now: Date = new Date()
+    var elapsed: number = now.getTime() - then.getTime()
+
+    if (elapsed > FPS) {
+      then = new Date(now.getTime() - (elapsed % FPS))
+
+      var sinceStart = now.getTime() - startTime.getTime()
+      var currentFps =
+        Math.round((1000 / (sinceStart / ++frameCount)) * 100) / 100
+
+      setAngle(refAngle.current + 1.25 / currentFps)
+
+      // setFps(
+      //   "Elapsed time: " +
+      //     Math.round((sinceStart / 1000) * 100) / 100 +
+      //     " secs<br />@ " +
+      //     currentFps +
+      //     " fps<br />angle: " +
+      //     refAngle.current +
+      //     "<br />"
+      // )
+    }
+
+    requestAnimationFrame(animate)
+  }
 
   useEffect(() => {
-    const c = setInterval(() => {
-      if (1 >= angle) setAngle(angle + 0.0025)
-    }, 1)
+    then = new Date()
+    startTime = then
+    // console.log(startTime)
+    var animationFrame = requestAnimationFrame(animate)
 
     return () => {
-      clearInterval(c)
+      cancelAnimationFrame(animationFrame)
     }
+  }, [])
+
+  useEffect(() => {
+    refAngle.current = angle
   }, [angle])
 
   return (
     <>
       <Header isBlog={false} />
       <MainContainer>
+        {/* <h1
+          style={{ fontFamily: "monospace" }}
+          dangerouslySetInnerHTML={{ __html: fps }}
+        /> */}
         <LogoContainer>
           <Upper angle={angle} />
           <Lower angle={angle} />
