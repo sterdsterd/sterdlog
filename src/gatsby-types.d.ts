@@ -745,6 +745,7 @@ type Frontmatter = {
   readonly description: Maybe<Scalars['String']>;
   readonly emoji: Maybe<Scalars['String']>;
   readonly featuredVideo: Maybe<Scalars['String']>;
+  readonly slug: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly thumbnail: Maybe<File>;
   readonly title: Maybe<Scalars['String']>;
@@ -763,6 +764,7 @@ type FrontmatterFieldSelector = {
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly emoji: InputMaybe<FieldSelectorEnum>;
   readonly featuredVideo: InputMaybe<FieldSelectorEnum>;
+  readonly slug: InputMaybe<FieldSelectorEnum>;
   readonly tags: InputMaybe<FieldSelectorEnum>;
   readonly thumbnail: InputMaybe<FileFieldSelector>;
   readonly title: InputMaybe<FieldSelectorEnum>;
@@ -773,6 +775,7 @@ type FrontmatterFilterInput = {
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly emoji: InputMaybe<StringQueryOperatorInput>;
   readonly featuredVideo: InputMaybe<StringQueryOperatorInput>;
+  readonly slug: InputMaybe<StringQueryOperatorInput>;
   readonly tags: InputMaybe<StringQueryOperatorInput>;
   readonly thumbnail: InputMaybe<FileFilterInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
@@ -783,6 +786,7 @@ type FrontmatterSortInput = {
   readonly description: InputMaybe<SortOrderEnum>;
   readonly emoji: InputMaybe<SortOrderEnum>;
   readonly featuredVideo: InputMaybe<SortOrderEnum>;
+  readonly slug: InputMaybe<SortOrderEnum>;
   readonly tags: InputMaybe<SortOrderEnum>;
   readonly thumbnail: InputMaybe<FileSortInput>;
   readonly title: InputMaybe<SortOrderEnum>;
@@ -1567,6 +1571,7 @@ type MdxFrontmatter = {
   readonly description: Maybe<Scalars['String']>;
   readonly emoji: Maybe<Scalars['String']>;
   readonly featuredVideo: Maybe<Scalars['String']>;
+  readonly slug: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly thumbnail: Maybe<File>;
   readonly title: Maybe<Scalars['String']>;
@@ -1585,6 +1590,7 @@ type MdxFrontmatterFieldSelector = {
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly emoji: InputMaybe<FieldSelectorEnum>;
   readonly featuredVideo: InputMaybe<FieldSelectorEnum>;
+  readonly slug: InputMaybe<FieldSelectorEnum>;
   readonly tags: InputMaybe<FieldSelectorEnum>;
   readonly thumbnail: InputMaybe<FileFieldSelector>;
   readonly title: InputMaybe<FieldSelectorEnum>;
@@ -1595,6 +1601,7 @@ type MdxFrontmatterFilterInput = {
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly emoji: InputMaybe<StringQueryOperatorInput>;
   readonly featuredVideo: InputMaybe<StringQueryOperatorInput>;
+  readonly slug: InputMaybe<StringQueryOperatorInput>;
   readonly tags: InputMaybe<StringQueryOperatorInput>;
   readonly thumbnail: InputMaybe<FileFilterInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
@@ -1605,6 +1612,7 @@ type MdxFrontmatterSortInput = {
   readonly description: InputMaybe<SortOrderEnum>;
   readonly emoji: InputMaybe<SortOrderEnum>;
   readonly featuredVideo: InputMaybe<SortOrderEnum>;
+  readonly slug: InputMaybe<SortOrderEnum>;
   readonly tags: InputMaybe<SortOrderEnum>;
   readonly thumbnail: InputMaybe<FileSortInput>;
   readonly title: InputMaybe<SortOrderEnum>;
@@ -3240,7 +3248,7 @@ type BlogPostBySlugQueryVariables = Exact<{
 }>;
 
 
-type BlogPostBySlugQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null, readonly mdx: { readonly id: string, readonly excerpt: string | null, readonly tableOfContents: Record<string, unknown> | null, readonly frontmatter: { readonly title: string | null, readonly date: string | null, readonly description: string | null, readonly tags: ReadonlyArray<string | null> | null } | null } | null, readonly previous: { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly title: string | null } | null } | null, readonly next: { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly title: string | null } | null } | null };
+type BlogPostBySlugQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null } | null } | null, readonly mdx: { readonly id: string, readonly excerpt: string | null, readonly tableOfContents: Record<string, unknown> | null, readonly frontmatter: { readonly title: string | null, readonly date: string | null } | null } | null, readonly previous: { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly title: string | null } | null } | null, readonly next: { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly title: string | null } | null } | null };
 
 type GatsbyImageSharpFixedFragment = { readonly base64: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string };
 

@@ -35,6 +35,10 @@ const config = {
         link: `portfolio`,
       },
       {
+        title: `TIL`,
+        link: `til`,
+      },
+      {
         title: `블로그`,
         link: `blog`,
       },
@@ -54,6 +58,13 @@ const config = {
       options: {
         name: `portfolio`,
         path: `${__dirname}/content/portfolio`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `til`,
+        path: `${__dirname}/content/til`,
       },
     },
     {

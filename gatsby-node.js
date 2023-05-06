@@ -12,6 +12,7 @@ const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
 const portfolioModal = path.resolve(
   `./src/components/Portfolio/PortfolioContent.tsx`
 )
+const tilPost = path.resolve(`./src/templates/til-post.tsx`)
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -118,6 +119,53 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
   }
+
+  // TIL Posts
+  const tilResults = await graphql(`
+    {
+      allFile(
+        filter: { sourceInstanceName: { eq: "til" } }
+        sort: { childrenMdx: { frontmatter: { date: ASC } } }
+      ) {
+        nodes {
+          childMdx {
+            id
+            fields {
+              slug
+            }
+            internal {
+              contentFilePath
+            }
+            frontmatter {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (tilResults.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your TIL posts`,
+      tilResults.errors
+    )
+    return
+  }
+
+  const tilPosts = tilResults.data.allFile.nodes.filter(it => it.childMdx)
+
+  if (tilPosts.length > 0) {
+    tilPosts.forEach((post, index) => {
+      createPage({
+        path: `${post.childMdx.frontmatter.slug}`,
+        component: `${tilPost}?__contentFilePath=${post.childMdx.internal.contentFilePath}`,
+        context: {
+          id: post.childMdx.id,
+        },
+      })
+    })
+  }
 }
 
 /**
@@ -178,6 +226,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       tags: [String]
       thumbnail: File
       featuredVideo: String
+      slug: String
     }
 
     type Fields {
