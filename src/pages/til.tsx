@@ -6,6 +6,7 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import PostListItem from "../components/PostListItem"
+import TableOfContents from "../components/TableOfContents"
 
 type Props = {
   data: Queries.PostListPageQuery
@@ -32,6 +33,15 @@ const Til = ({ data, location }: Props) => {
         </h1>
         <p>총 {posts.length}개의 글이 있어요</p>
       </div>
+
+      <TableOfContents
+        items={posts.map(post => {
+          return {
+            url: post.childMdx?.frontmatter?.slug!,
+            title: post.childMdx?.frontmatter?.title!,
+          }
+        })}
+      />
       <PostWrapper>
         {posts.map(post => {
           var mdx = post.childMdx!

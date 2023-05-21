@@ -3296,7 +3296,7 @@ type PortfolioListQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ 
 type PostListPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PostListPageQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly childMdx: { readonly excerpt: string | null, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null, readonly emoji: string | null, readonly tags: ReadonlyArray<string | null> | null } | null } | null }> } };
+type PostListPageQuery = { readonly allFile: { readonly nodes: ReadonlyArray<{ readonly childMdx: { readonly excerpt: string | null, readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly slug: string | null } | null } | null }> } };
 
 
 }
