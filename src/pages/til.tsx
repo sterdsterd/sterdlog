@@ -28,9 +28,7 @@ const Til = ({ data, location }: Props) => {
   return (
     <Layout isBlog={true}>
       <div style={{ paddingLeft: "1rem" }}>
-        <h1 style={{ marginBottom: "0.5rem" }}>
-          {selectedTag === "모든 글" ? selectedTag : `#${selectedTag}`}
-        </h1>
+        <h1 style={{ marginBottom: "0.5rem" }}>Under Construction</h1>
         <p>총 {posts.length}개의 글이 있어요</p>
       </div>
 
@@ -42,22 +40,6 @@ const Til = ({ data, location }: Props) => {
           }
         })}
       />
-      <PostWrapper>
-        {posts.map(post => {
-          var mdx = post.childMdx!
-
-          return (
-            <PostListItem
-              slug={mdx.frontmatter?.slug!}
-              emoji="?"
-              title="?"
-              date={mdx.frontmatter?.date!}
-              description={mdx.excerpt!}
-              tags={["?"]}
-            />
-          )
-        })}
-      </PostWrapper>
     </Layout>
   )
 }
