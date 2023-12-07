@@ -173,8 +173,6 @@ const Button = styled.button`
 const Blog = () => {
   const refAngle = useRef<number>(-0.4)
   const [angle, setAngle] = useState<number>(-0.4)
-  // const [fps, setFps] = useState<string>("")
-  // const FPS = 1000 / 60
   var then: number
   var startTime: number
   var frameCount: number = 0
@@ -183,11 +181,6 @@ const Blog = () => {
     if (refAngle.current > 1) return
 
     var now: number = performance.now()
-    // var elapsed: number = now - then
-
-    // if (elapsed > FPS) {
-    // then = new Date(now.getTime() - (elapsed % FPS))
-    // then = now - (elapsed % FPS)
 
     var sinceStart = now - startTime
     var currentFps =
@@ -195,17 +188,6 @@ const Blog = () => {
 
     refAngle.current += 1.25 / currentFps
     setAngle(refAngle.current)
-
-    // setFps(
-    //   "Elapsed time: " +
-    //     Math.round((sinceStart / 1000) * 100) / 100 +
-    //     " secs<br />@ " +
-    //     currentFps +
-    //     " fps<br />angle: " +
-    //     refAngle.current +
-    //     "<br />"
-    // )
-    // }
 
     requestAnimationFrame(animate)
   }
@@ -225,10 +207,6 @@ const Blog = () => {
     <>
       <Header isBlog={false} />
       <MainContainer>
-        {/* <h1
-          style={{ fontFamily: "monospace", fontSize: "0.5rem" }}
-          dangerouslySetInnerHTML={{ __html: fps }}
-        /> */}
         <LogoContainer>
           <Upper angle={angle} />
           <Lower angle={angle} />
@@ -258,13 +236,15 @@ const Blog = () => {
             <br />
             <b>이율원</b>입니다
           </h1>
-          <h2>학력</h2>
+          <h2>약력</h2>
           <p>
             <LinkText href="https://cse.konkuk.ac.kr/">
               건국대학교 컴퓨터공학부
             </LinkText>{" "}
-            22학번 재학
+            22학번 휴학
             <DateText>, 2022년 3월 - 현재</DateText>
+            <br />
+            대한민국 공군 복무<DateText>, 2023년 9월 - 현재</DateText>
           </p>
           <h2>수상 경력</h2>
           <p>
