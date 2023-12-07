@@ -157,11 +157,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   if (tilPosts.length > 0) {
     tilPosts.forEach((post, index) => {
+      const previousPostId =
+        index === 0 ? null : tilPosts[index - 1].childMdx.id
+      const nextPostId =
+        index === tilPosts.length - 1 ? null : tilPosts[index + 1].childMdx.id
       createPage({
         path: `${post.childMdx.frontmatter.slug}`,
         component: `${tilPost}?__contentFilePath=${post.childMdx.internal.contentFilePath}`,
         context: {
           id: post.childMdx.id,
+          previousPostId,
+          nextPostId,
         },
       })
     })

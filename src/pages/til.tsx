@@ -15,7 +15,6 @@ type Props = {
 
 const Til = ({ data, location }: Props) => {
   const posts = data.allFile.nodes.filter(post => post.childMdx)
-  const [selectedTag, setSelectedTag] = useState<string>("모든 글")
 
   if (posts.length === 0) {
     return (
@@ -28,8 +27,11 @@ const Til = ({ data, location }: Props) => {
   return (
     <Layout isBlog={true}>
       <div style={{ paddingLeft: "1rem" }}>
-        <h1 style={{ marginBottom: "0.5rem" }}>Under Construction</h1>
-        <p>총 {posts.length}개의 글이 있어요</p>
+        <h1 style={{ marginBottom: "0.5rem" }}>TIL</h1>
+        <p>
+          Under Construction
+          <br />총 {posts.length}개의 글이 있어요
+        </p>
       </div>
 
       <TableOfContents
@@ -63,7 +65,7 @@ const PostWrapper = styled.ol`
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = () => <Seo title="블로그" />
+export const Head = () => <Seo title="TIL" />
 
 export const pageQuery = graphql`
   query PostListPage {
